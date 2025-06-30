@@ -57,7 +57,6 @@ func _applyAirAccel():
 	var curSpeedInInputDir = inputDir.dot(velocity);
 	var maxSpeedToAdd = max(0, airSpeedCap - curSpeedInInputDir);
 	var speedToAddInInputDir = clampf(airAccel * airSpeedCap * dt, 0.0, maxSpeedToAdd); # TODO multiplication by airSpeedCap should probably be an analog value
-	print("curSpeedInInputDir = %3.1f | maxSpeedToAdd = %3.1f | speedToAddInInputDir = %3.1f" % [curSpeedInInputDir, maxSpeedToAdd, speedToAddInInputDir]);
 	outWishVel += speedToAddInInputDir * inputDir;
 
 
