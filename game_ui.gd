@@ -6,4 +6,4 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	$SpeedBox/SpeedLabel.text = "%.1f" % (Globals.playerSpeedXy / 0.0254);
+	$SpeedBox/SpeedLabel.text = "%.1f | %.1f" % [Globals.playerSpeedXy / 0.0254, Globals.playerSpeedZ / 0.0254];

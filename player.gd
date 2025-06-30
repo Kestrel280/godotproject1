@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 const INCHES_PER_METER : float = 39.3701;
+const GROUND_NORMAL_THRESHOLD : float = 0.7; # If y component of surface normal is above this value, treat is as a floor
+const GROUND_SLIDE_THRESHOLD : float = 0.1; # Dot product of velocity + collision normal; if under this value, project velocity onto ground plane
 
 @export var groundFriction = 4;
 @export var mass = 70;
@@ -15,6 +17,7 @@ var MOUSE_SENSITIVITY = 0.004; # TODO move to a globals/settings
 
 var rot_x = 0	# Cumulative rotation
 var rot_y = 0	# Cumulative rotation
+var onGround : bool;
 var inputDir : Vector3;
 var outWishVel : Vector3;
 var dt;
@@ -34,23 +37,34 @@ func _physics_process(delta: float) -> void:
 
 func _playerMove() -> void:
 	outWishVel = Vector3(velocity);
-	if not is_on_floor():
-		_airMove();
-	else:
-		if Input.is_action_pressed("jump"):
-			_jump()
-			_airMove()
+	outWishVel += get_gravity() * dt;
+	
+	if onGround:
+		if Input.is_action_pressed("jump") and _tryJump():
+			_airMove();
 		else:
 			_groundMove()
+	else:
+		_airMove();
+		
 	velocity = outWishVel;
+	var collision = move_and_collide(velocity * dt, true); # TEST for collision, do not actually perform
+	if collision:
+		var severity = abs(velocity.normalized().dot(collision.get_normal())); # 0-1: higher = more severe collision
+		velocity = velocity.slide(collision.get_normal());
+		onGround = collision.get_normal().y > GROUND_NORMAL_THRESHOLD;
+	else:
+		onGround = false;
+	move_and_slide()
+
 	Globals.playerSpeedXy = Vector2(velocity.x, velocity.z).length();
-	move_and_slide();
+	Globals.playerSpeedZ = velocity.y;
+	
 	return;
 
 
 func _airMove() -> void:
 	_applyAirAccel();
-	outWishVel += get_gravity() * dt;
 
 
 func _applyAirAccel():
@@ -81,8 +95,9 @@ func _applyGroundAccel() -> void:
 	outWishVel += speedToAddInInputDir * inputDir;
 	
 
-func _jump() -> void:
-	outWishVel.y += jumpImpulse;
+func _tryJump() -> bool:
+	outWishVel.y = jumpImpulse;
+	return true;
 
 
 func _input(event):
