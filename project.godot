@@ -15,6 +15,10 @@ run/main_scene="uid://on6rtx26b35i"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://globals.gd"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
