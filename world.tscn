@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://on6rtx26b35i"]
+
+[ext_resource type="PackedScene" uid="uid://4mbo3jq1qpdv" path="res://player.tscn" id="1_f3sb7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gv5m4"]
+radius = 1.0
+height = 2.0
+
+[node name="World" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="FloorHitbox" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_gv5m4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_f3sb7")
+
+[node name="LightPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41582, 2.55609, -8.87064)
+
+[node name="LightSource" type="OmniLight3D" parent="LightPivot"]
+light_color = Color(0.91502, 0.724501, 0.997123, 1)
+light_energy = 11.918
+omni_range = 408.688
+
+[node name="LightModel" type="MeshInstance3D" parent="LightPivot"]
+mesh = SubResource("SphereMesh_gv5m4")
+
+[node name="Player" parent="." instance=ExtResource("1_f3sb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.65968, 0)
