@@ -1,31 +1,42 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
+
+signal paused
+signal unpaused
 
 const INCHES_PER_METER : float = 39.3701;
 const GROUND_NORMAL_THRESHOLD : float = 0.7; # If y component of surface normal is above this value, treat is as a floor
-const GROUND_SLIDE_THRESHOLD : float = 0.1; # Dot product of velocity + collision normal; if under this value, project velocity onto ground plane
+
+var weapon : Weapon;
+@export var weapons : Array[Weapon] = [];
 
 @export var groundFriction = 4;
 @export var mass = 70;
 
-@export var jumpImpulse = 4;
-@export var airAccel = 150;
+@export var jumpImpulse = 8;
+@export var airAccel = 15000;
 @export var airSpeedCap = 30 / INCHES_PER_METER;
 @export var groundFrictionStopSpeedThreshold = 0.5 / INCHES_PER_METER; # On ground, if speed less than this value, just set to 0
 @export var groundAccel = 5; # Ground acceleration
 @export var groundSpeedCap = 320 / INCHES_PER_METER; # Max walking speed on ground
-var MOUSE_SENSITIVITY = 0.004; # TODO move to a globals/settings
+var MOUSE_SENSITIVITY = 0.0025; # TODO move to a globals/settings
 
-var rot_x = 0	# Cumulative rotation
-var rot_y = 0	# Cumulative rotation
-var onGround : bool;
-var inputDir : Vector3;
-var outWishVel : Vector3;
-var dt;
+var xy_speed; # XY (actually xz) speed of player, updated in _playerMove()
+var z_speed; # Z (actually Y) speed of player, updated in _playerMove();
+var inControl; # Player has control
+var rot_x = 0; # Cumulative rotation
+var rot_y = 0; # Cumulative rotation
+var onGround : bool; # Player is on ground
+var inputDir : Vector3; # Direction of player's input (unit vector)
+var outWishVel : Vector3; # Per-frame desired movement vector
+var dt; # Physics deltatime
+
 
 func _ready() -> void:
+	Globals.player = self;
+	_takeControl();
 	velocity = Vector3.ZERO;
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 	return;
+
 
 func _physics_process(delta: float) -> void:
 	dt = delta;
@@ -57,8 +68,8 @@ func _playerMove() -> void:
 		onGround = false;
 	move_and_slide()
 
-	Globals.playerSpeedXy = Vector2(velocity.x, velocity.z).length();
-	Globals.playerSpeedZ = velocity.y;
+	Globals.player.xy_speed = Vector2(velocity.x, velocity.z).length();
+	Globals.player.z_speed = velocity.y;
 	
 	return;
 
@@ -101,8 +112,17 @@ func _tryJump() -> bool:
 
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		_handleMouseMotionEvent(event);
+	if event is InputEventKey:
+		if Input.is_action_just_pressed("pause"): toggleInControl();
+		elif Input.is_action_just_pressed("weapon0"): _equipWeapon(0);
+		elif Input.is_action_just_pressed("weapon1"): _equipWeapon(1);
+	elif event is InputEventMouseMotion:
+		if inControl:
+			_handleMouseMotionEvent(event);
+	elif event is InputEventMouseButton:
+		if (event.button_index == MOUSE_BUTTON_LEFT):
+			if weapon:
+				weapon.shoot();
 
 
 func _handleMouseMotionEvent(event):
@@ -115,5 +135,35 @@ func _handleMouseMotionEvent(event):
 	$Pivot/Camera.transform.basis = Basis();
 	$Pivot/Camera.rotate_object_local(Vector3(1, 0, 0), rot_y);
 
+
 func getGroundFriction() -> float:
 	return groundFriction;
+
+
+func toggleInControl() -> void:
+	if !inControl: _takeControl();
+	else: _releaseControl();
+
+
+func _takeControl():
+	inControl = true;
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
+	set_physics_process(true);
+	unpaused.emit();
+
+
+func _releaseControl():
+	inControl = false;
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
+	set_physics_process(false);
+	paused.emit();
+	
+
+func _equipWeapon(idx : int) -> void:
+	if (idx >= weapons.size()): return;
+	
+	for child in $Pivot/Camera/WeaponContainer.get_children():
+		$Pivot/Camera/WeaponContainer.remove_child(child);
+	var weaponMesh = weapons[idx].model.instantiate();
+	weapon = weapons[idx];
+	$Pivot/Camera/WeaponContainer.add_child(weaponMesh);

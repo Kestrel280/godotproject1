@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dtx5qwyorljnd"]
+
+[ext_resource type="PackedScene" uid="uid://cvvmofj1v4re4" path="res://models/shotgun.tscn" id="1_yi04f"]
+[ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="2_5rhaf"]
+[ext_resource type="Script" uid="uid://kp6m48guskyt" path="res://weapons/default_shoot_action.gd" id="3_5rhaf"]
+
+[resource]
+script = ExtResource("2_5rhaf")
+model = ExtResource("1_yi04f")
+shoot_sound_path = ""
+ammo = 10
+reload_time = 2.0
+shoot_script = ExtResource("3_5rhaf")
+metadata/_custom_type_script = "uid://drd4usvg41ymq"

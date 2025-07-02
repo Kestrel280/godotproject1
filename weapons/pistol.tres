@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dyglupyo8ytbh"]
+
+[ext_resource type="PackedScene" uid="uid://qhakx35g640p" path="res://models/pistol.tscn" id="1_m7cpi"]
+[ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="1_nld4i"]
+[ext_resource type="Script" uid="uid://kp6m48guskyt" path="res://weapons/default_shoot_action.gd" id="3_njcfc"]
+
+[resource]
+script = ExtResource("1_nld4i")
+model = ExtResource("1_m7cpi")
+shoot_sound_path = ""
+ammo = 10
+reload_time = 2.0
+shoot_script = ExtResource("3_njcfc")
+metadata/_custom_type_script = "uid://drd4usvg41ymq"

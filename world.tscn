@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://on6rtx26b35i"]
+[gd_scene load_steps=13 format=3 uid="uid://on6rtx26b35i"]
 
+[ext_resource type="Script" uid="uid://csxy6ngpydymw" path="res://world.gd" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://4mbo3jq1qpdv" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://demapfong2ttm" path="res://textures/asdf_.png" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://c76pos58ksu64" path="res://game_ui.tscn" id="2_fj7yv"]
-[ext_resource type="PackedScene" uid="uid://coaecjmpu04b" path="res://box.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://coaecjmpu04b" path="res://prefabs/box.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://c007o8nr32axm" path="res://ramp.tscn" id="5_036b0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
@@ -30,6 +31,7 @@ background_energy_multiplier = 0.2
 sky = SubResource("Sky_fj7yv")
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_dwbse")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.735603, -0.586657, 0.338705, -1.47454e-08, 0.499998, 0.866026, -0.677412, -0.637052, 0.3678, 0, 9.27462, 0)
@@ -44,6 +46,7 @@ shape = SubResource("BoxShape3D_gv5m4")
 mesh = SubResource("BoxMesh_f3sb7")
 
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4082, 68.6538, 2.09831)
 
 [node name="GameUi" parent="." instance=ExtResource("2_fj7yv")]
@@ -65,3 +68,6 @@ transform = Transform3D(5.705, 0, 0, 0, 1.61, 0, 0, 0, 12.555, 12.22, 0.566118, 
 
 [node name="Ramp4" parent="." instance=ExtResource("5_036b0")]
 transform = Transform3D(21.12, 0, 0, 0, 3.735, 0, 0, 0, 12.555, -18.2802, 0.566118, 16.9393)
+
+[connection signal="paused" from="Player" to="." method="_on_player_paused"]
+[connection signal="unpaused" from="Player" to="." method="_on_player_unpaused"]

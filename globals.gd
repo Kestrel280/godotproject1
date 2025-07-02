@@ -1,8 +1,7 @@
 extends Node
 
+var player : Player;
 
-var playerSpeedXy : float = 0.0;
-var playerSpeedZ : float = 0.0;
 
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
