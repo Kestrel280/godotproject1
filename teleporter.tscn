@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv73x563v8fyl"]
+
+[ext_resource type="Script" uid="uid://guku43ubx08k" path="res://teleporter.gd" id="1_eumkw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eumkw"]
+
+[node name="Teleporter" type="Area3D"]
+script = ExtResource("1_eumkw")
+
+[node name="TriggerVolume" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_eumkw")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="Skin" type="MeshInstance3D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

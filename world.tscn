@@ -1,17 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://on6rtx26b35i"]
+[gd_scene load_steps=18 format=3 uid="uid://on6rtx26b35i"]
 
 [ext_resource type="Script" uid="uid://csxy6ngpydymw" path="res://world.gd" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://4mbo3jq1qpdv" path="res://player.tscn" id="1_f3sb7"]
-[ext_resource type="Texture2D" uid="uid://demapfong2ttm" path="res://textures/asdf_.png" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://c76pos58ksu64" path="res://game_ui.tscn" id="2_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://cir7c7eml2lmo" path="res://textures/__face_debug.png" id="2_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://coaecjmpu04b" path="res://prefabs/box.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://c007o8nr32axm" path="res://ramp.tscn" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://cv73x563v8fyl" path="res://teleporter.tscn" id="7_pkg7o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 size = Vector3(300, 2, 300)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
-albedo_texture = ExtResource("1_tlwt5")
+albedo_texture = ExtResource("2_pkg7o")
 uv1_scale = Vector3(50, 50, 50)
 
 [sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
@@ -29,6 +30,25 @@ sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
 background_mode = 2
 background_energy_multiplier = 0.2
 sky = SubResource("Sky_fj7yv")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pkg7o"]
+size = Vector3(7.1, 6.42, 5.64)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pkg7o"]
+frequency = 0.0631
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pkg7o"]
+width = 1024
+height = 1024
+as_normal_map = true
+bump_strength = 16.5
+noise = SubResource("FastNoiseLite_pkg7o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkg7o"]
+albedo_color = Color(0.436251, 0.632807, 0.612374, 1)
+normal_enabled = true
+normal_scale = 0.2
+normal_texture = SubResource("NoiseTexture2D_pkg7o")
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_dwbse")
@@ -69,5 +89,25 @@ transform = Transform3D(5.705, 0, 0, 0, 1.61, 0, 0, 0, 12.555, 12.22, 0.566118, 
 [node name="Ramp4" parent="." instance=ExtResource("5_036b0")]
 transform = Transform3D(21.12, 0, 0, 0, 3.735, 0, 0, 0, 12.555, -18.2802, 0.566118, 16.9393)
 
+[node name="TeleExit" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.8015, 64.4799, 0)
+
+[node name="Teleporter" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("7_pkg7o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4175, 2.4616, 0)
+destination = NodePath("../TeleExit")
+set_view_angle = true
+set_view_right_deg = -102.032
+set_view_up_deg = -57.112
+
+[node name="TriggerVolume" parent="Teleporter" index="0"]
+shape = SubResource("BoxShape3D_pkg7o")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="Skin" parent="Teleporter" index="1"]
+material_override = SubResource("StandardMaterial3D_pkg7o")
+
 [connection signal="paused" from="Player" to="." method="_on_player_paused"]
 [connection signal="unpaused" from="Player" to="." method="_on_player_unpaused"]
+
+[editable path="Teleporter"]

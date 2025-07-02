@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://demapfong2ttm"
-path.s3tc="res://.godot/imported/asdf_.png-d6ee483d73d27bb62252860df499c148.s3tc.ctex"
+uid="uid://cir7c7eml2lmo"
+path.s3tc="res://.godot/imported/__face_debug.png-436a051ba7caecd0e5ac10aaed10d34e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/asdf_.png"
-dest_files=["res://.godot/imported/asdf_.png-d6ee483d73d27bb62252860df499c148.s3tc.ctex"]
+source_file="res://textures/__face_debug.png"
+dest_files=["res://.godot/imported/__face_debug.png-436a051ba7caecd0e5ac10aaed10d34e.s3tc.ctex"]
 
 [params]
 

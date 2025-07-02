@@ -167,3 +167,16 @@ func _equipWeapon(idx : int) -> void:
 	var weaponMesh = weapons[idx].model.instantiate();
 	weapon = weapons[idx];
 	$Pivot/Camera/WeaponContainer.add_child(weaponMesh);
+
+
+func _on_tele_body_entered(body: Node3D) -> void:
+	position = %TeleExit.position;
+
+
+func set_view_angle(right : float, up : float) -> void:
+	rot_x = right;
+	rot_y = up;
+	$Pivot.transform.basis = Basis();
+	$Pivot.rotate_object_local(Vector3(0, 1, 0), rot_x);
+	$Pivot/Camera.transform.basis = Basis();
+	$Pivot/Camera.rotate_object_local(Vector3(1, 0, 0), rot_y);
