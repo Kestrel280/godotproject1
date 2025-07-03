@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://c007o8nr32axm"]
 
-[ext_resource type="Shape3D" uid="uid://b58jdvobn7caw" path="res://ramp.tres" id="1_sqs1n"]
+[ext_resource type="Shape3D" uid="uid://b58jdvobn7caw" path="res://ramp.tres" id="1_ngryf"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_sqs1n"]
 
 [node name="Ramp" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
 
 [node name="RampCol" type="CollisionShape3D" parent="."]
-shape = ExtResource("1_sqs1n")
+shape = ExtResource("1_ngryf")
 debug_color = Color(4.23551e-06, 0.524584, 0.614806, 1)
 
 [node name="RampMesh" type="MeshInstance3D" parent="."]

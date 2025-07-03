@@ -11,12 +11,12 @@ config_version=5
 [application]
 
 config/name="GodotProject1"
-run/main_scene="uid://on6rtx26b35i"
+run/main_scene="uid://rbgma3n7gao2"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 
-Globals="*res://globals.gd"
+Globals="*res://scripts/globals.gd"
 
 [display]
 

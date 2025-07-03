@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cv73x563v8fyl"]
 
-[ext_resource type="Script" uid="uid://guku43ubx08k" path="res://teleporter.gd" id="1_eumkw"]
+[ext_resource type="Script" uid="uid://guku43ubx08k" path="res://scenes/teleporter.gd" id="1_vurns"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eumkw"]
 
 [node name="Teleporter" type="Area3D"]
-script = ExtResource("1_eumkw")
+script = ExtResource("1_vurns")
 
 [node name="TriggerVolume" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_eumkw")

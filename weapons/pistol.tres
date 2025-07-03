@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://qhakx35g640p" path="res://models/pistol.tscn" id="1_m7cpi"]
 [ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="1_nld4i"]
-[ext_resource type="Script" uid="uid://kp6m48guskyt" path="res://weapons/default_shoot_action.gd" id="3_njcfc"]
+[ext_resource type="Script" uid="uid://kp6m48guskyt" path="res://weapons/shoot_actions/default_shoot_action.gd" id="3_njcfc"]
 
 [resource]
 script = ExtResource("1_nld4i")

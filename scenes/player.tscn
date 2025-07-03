@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://4mbo3jq1qpdv"]
 
-[ext_resource type="Script" uid="uid://bwhu3otek4i7" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://bwhu3otek4i7" path="res://scenes/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="2_hqtel"]
 [ext_resource type="Resource" uid="uid://dyglupyo8ytbh" path="res://weapons/pistol.tres" id="3_sweqy"]
 [ext_resource type="Resource" uid="uid://dtx5qwyorljnd" path="res://weapons/shotgun.tres" id="4_2hs0m"]
@@ -18,13 +18,12 @@ weapons = Array[ExtResource("2_hqtel")]([ExtResource("3_sweqy"), ExtResource("4_
 [node name="ColBox" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sh265")
 
-[node name="Pivot" type="Node3D" parent="."]
-
-[node name="Model" type="MeshInstance3D" parent="Pivot"]
+[node name="Model" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_4flbx")
-skeleton = NodePath("../..")
 
-[node name="Camera" type="Camera3D" parent="Pivot"]
+[node name="Head" type="Node3D" parent="."]
 
-[node name="WeaponContainer" type="Node3D" parent="Pivot/Camera"]
+[node name="Camera" type="Camera3D" parent="Head"]
+
+[node name="WeaponContainer" type="Node3D" parent="Head"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.184659, -0.106542, -0.589557)

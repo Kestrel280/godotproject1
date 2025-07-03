@@ -1,7 +1,9 @@
-extends Node3D
+extends Node
 
-var pauseMenuScenePacked = preload("res://pause_menu.tscn");
+
+var pauseMenuScenePacked = preload("res://scenes/pause_menu.tscn");
 var pauseMenuScene;
+
 
 func _on_player_paused() -> void:
 	pauseMenuScene = pauseMenuScenePacked.instantiate();
