@@ -9,7 +9,7 @@ func shoot(shooter : CharacterBody3D) -> void:
 		var shooterWeapNode = shooter.get_node("Head/WeaponContainer");
 		var space_state = shooterHeadNode.get_world_3d().direct_space_state;
 		var origin = shooterHeadNode.global_position;
-		var target = -RAY_LENGTH * shooterHeadNode.global_transform.basis.z;
+		var target = shooterHeadNode.global_position - RAY_LENGTH * shooterHeadNode.global_transform.basis.z;
 		var query = PhysicsRayQueryParameters3D.create(origin, target);
 		query.collide_with_areas = true;
 		query.exclude = [shooter];
