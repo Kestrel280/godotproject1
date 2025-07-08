@@ -38,7 +38,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	dt = delta;
 	var _inputDir2d = Input.get_vector("move_left", "move_right", "move_forward", "move_backward");
-	inputDir = ($Head.transform.basis * Vector3(_inputDir2d.x, 0, _inputDir2d.y)).normalized();
+	inputDir = (self.transform.basis * Vector3(_inputDir2d.x, 0, _inputDir2d.y)).normalized();
 	pm.move(dt);
 
 
@@ -49,12 +49,13 @@ func _input(event):
 			else: _releaseControl();
 		elif Input.is_action_just_pressed("weapon0"): _equipWeapon(0);
 		elif Input.is_action_just_pressed("weapon1"): _equipWeapon(1);
+		elif Input.is_action_just_pressed("weapon2"): _equipWeapon(2);
 	elif event is InputEventMouseMotion:
 		if inControl:
 			_handleMouseMotionEvent(event);
 	elif event is InputEventMouseButton:
 		if (event.button_index == MOUSE_BUTTON_LEFT) and weapon and event.pressed:
-			weapon.shoot();
+			weapon.shoot(self);
 
 
 func _handleMouseMotionEvent(event):
@@ -62,10 +63,10 @@ func _handleMouseMotionEvent(event):
 	rot_y -= event.relative.y * MOUSE_SENSITIVITY;
 	rot_x = wrapf(rot_x, -PI, PI);
 	rot_y = clampf(rot_y, -PI/2, PI/2);
+	self.transform.basis = Basis();
+	self.rotate_object_local(Vector3(0, 1, 0), rot_x);
 	$Head.transform.basis = Basis();
-	$Head.rotate_object_local(Vector3(0, 1, 0), rot_x);
-	$Head/Camera.transform.basis = Basis();
-	$Head/Camera.rotate_object_local(Vector3(1, 0, 0), rot_y);
+	$Head.rotate_object_local(Vector3(1, 0, 0), rot_y);
 
 
 func _takeControl():
@@ -95,7 +96,7 @@ func _equipWeapon(idx : int) -> void:
 func set_view_angle(right : float, up : float) -> void:
 	rot_x = right;
 	rot_y = up;
+	self.transform.basis = Basis();
+	self.rotate_object_local(Vector3(0, 1, 0), rot_x);
 	$Head.transform.basis = Basis();
-	$Head.rotate_object_local(Vector3(0, 1, 0), rot_x);
-	$Head/Camera.transform.basis = Basis();
-	$Head/Camera.rotate_object_local(Vector3(1, 0, 0), rot_y);
+	$Head.rotate_object_local(Vector3(1, 0, 0), rot_y);

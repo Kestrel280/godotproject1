@@ -23,6 +23,6 @@ func _load():
 	shoot_script_instance = shoot_script.new()
 
 
-func shoot():
+func shoot(shooter : CharacterBody3D):
 	if (!_loaded): _load();
-	shoot_script_instance.shoot();
+	shoot_script_instance.shoot(shooter);

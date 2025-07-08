@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://4mbo3jq1qpdv"]
+[gd_scene load_steps=8 format=3 uid="uid://4mbo3jq1qpdv"]
 
 [ext_resource type="Script" uid="uid://bwhu3otek4i7" path="res://scenes/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="2_hqtel"]
 [ext_resource type="Resource" uid="uid://dyglupyo8ytbh" path="res://weapons/pistol.tres" id="3_sweqy"]
 [ext_resource type="Resource" uid="uid://dtx5qwyorljnd" path="res://weapons/shotgun.tres" id="4_2hs0m"]
+[ext_resource type="Resource" uid="uid://c5auuuc62868f" path="res://weapons/flashlight.tres" id="5_qlg0r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 height = 1.8
@@ -13,7 +14,7 @@ height = 1.8
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4flbx")
-weapons = Array[ExtResource("2_hqtel")]([ExtResource("3_sweqy"), ExtResource("4_2hs0m")])
+weapons = Array[ExtResource("2_hqtel")]([ExtResource("3_sweqy"), ExtResource("4_2hs0m"), ExtResource("5_qlg0r")])
 
 [node name="ColBox" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sh265")

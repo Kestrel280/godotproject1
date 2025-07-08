@@ -51,6 +51,7 @@ normal_texture = SubResource("NoiseTexture2D_pkg7o")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.735603, -0.586657, 0.338705, -1.47454e-08, 0.499998, 0.866026, -0.677412, -0.637052, 0.3678, 0, 9.27462, 0)
+light_energy = 0.1
 shadow_enabled = true
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -95,5 +96,7 @@ shape = SubResource("BoxShape3D_pkg7o")
 
 [node name="Skin" parent="Teleporter" index="1"]
 material_override = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
 
 [editable path="Teleporter"]
