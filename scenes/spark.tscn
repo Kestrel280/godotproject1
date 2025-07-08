@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4lwveqij3bq3"]
+
+[ext_resource type="Script" uid="uid://dbcb410qsc8xt" path="res://scenes/spark.gd" id="1_7yxpd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xiqgv"]
+
+[node name="Spark" type="Node3D"]
+script = ExtResource("1_7yxpd")
+
+[node name="Light" type="OmniLight3D" parent="."]
+omni_range = 100.0
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xiqgv")

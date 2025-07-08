@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://on6rtx26b35i"]
+[gd_scene load_steps=16 format=3 uid="uid://on6rtx26b35i"]
 
+[ext_resource type="Script" uid="uid://csxy6ngpydymw" path="res://scenes/world.gd" id="1_71j4m"]
 [ext_resource type="Texture2D" uid="uid://cir7c7eml2lmo" path="res://textures/__face_debug.png" id="2_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://coaecjmpu04b" path="res://prefabs/box.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://c007o8nr32axm" path="res://prefabs/ramp.tscn" id="5_036b0"]
@@ -48,6 +49,7 @@ normal_scale = 0.2
 normal_texture = SubResource("NoiseTexture2D_pkg7o")
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_71j4m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.735603, -0.586657, 0.338705, -1.47454e-08, 0.499998, 0.866026, -0.677412, -0.637052, 0.3678, 0, 9.27462, 0)
