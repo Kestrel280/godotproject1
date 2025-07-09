@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dtx5qwyorljnd"]
+
+[ext_resource type="PackedScene" uid="uid://cvvmofj1v4re4" path="res://models/smg.tscn" id="1_lvfa7"]
+[ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="2_385r2"]
+[ext_resource type="Script" uid="uid://kp6m48guskyt" path="res://weapons/shoot_actions/default_shoot_action.gd" id="3_cr6a0"]
+
+[resource]
+script = ExtResource("2_385r2")
+model = ExtResource("1_lvfa7")
+shoot_sound_path = ""
+ammo = 10
+shot_interval = 0.08
+single_shot = false
+shoot_script = ExtResource("3_cr6a0")
+metadata/_custom_type_script = "uid://drd4usvg41ymq"

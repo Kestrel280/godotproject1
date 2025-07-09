@@ -39,6 +39,9 @@ func _physics_process(delta: float) -> void:
 	dt = delta;
 	var _inputDir2d = Input.get_vector("move_left", "move_right", "move_forward", "move_backward");
 	inputDir = (self.transform.basis * Vector3(_inputDir2d.x, 0, _inputDir2d.y)).normalized();
+	if weapon:
+		if weapon.single_shot and Input.is_action_just_pressed("primary_fire"): weapon.try_shoot(self)
+		elif (!weapon.single_shot) and Input.is_action_pressed("primary_fire"): weapon.try_shoot(self);
 	pm.move(dt);
 
 
@@ -53,9 +56,6 @@ func _input(event):
 	elif event is InputEventMouseMotion:
 		if inControl:
 			_handleMouseMotionEvent(event);
-	elif event is InputEventMouseButton:
-		if (event.button_index == MOUSE_BUTTON_LEFT) and weapon and event.pressed:
-			weapon.shoot(self);
 
 
 func _handleMouseMotionEvent(event):

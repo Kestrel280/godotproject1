@@ -5,17 +5,15 @@ class_name Weapon extends Resource
 @export var model : PackedScene;
 @export var shoot_sound_path : String;
 @export_subgroup("Properties")
-@export var ammo : int = 10;
-@export var reload_time : float = 2.0;
+@export_range(1.0, 100.0) var ammo : int = 10;
+@export_range(0.05, 2.0) var shot_interval : float = 0.2;
+@export var single_shot : bool = false;
 @export var shoot_script : GDScript;
 
 
 var _loaded;
 var shoot_script_instance;
-
-
-func _ready():
-	_load();
+var in_shot_recovery : bool = false;
 
 
 func _load():
@@ -23,6 +21,10 @@ func _load():
 	shoot_script_instance = shoot_script.new()
 
 
-func shoot(shooter : CharacterBody3D):
+func try_shoot(shooter : CharacterBody3D):
 	if (!_loaded): _load();
+	if in_shot_recovery: return
 	shoot_script_instance.shoot(shooter);
+	in_shot_recovery = true;
+	await shooter.get_tree().create_timer(shot_interval).timeout
+	in_shot_recovery = false;
