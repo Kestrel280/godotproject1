@@ -56,3 +56,10 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_rns2u")
+
+[node name="DebugBox" type="Label" parent="."]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 492.0
+offset_right = 372.0
+offset_bottom = 596.0

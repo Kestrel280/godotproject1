@@ -80,16 +80,21 @@ transform = Transform3D(36.59, 0, 0, 0, 20.014, 0, 0, 0, 156.316, -61.1756, 0.90
 transform = Transform3D(5.705, 0, 0, 0, 1.61, 0, 0, 0, 12.555, 12.22, 0.566118, -5.69196)
 
 [node name="Ramp4" parent="." instance=ExtResource("5_036b0")]
-transform = Transform3D(21.12, 0, 0, 0, 3.735, 0, 0, 0, 12.555, -18.2802, 0.566118, 16.9393)
+transform = Transform3D(21.12, 0, 0, 0, 3.735, 0, 0, 0, 12.555, -6.02171, 0.566118, 25.4415)
+
+[node name="Ramp5" parent="." instance=ExtResource("5_036b0")]
+transform = Transform3D(39.865, 0, 0, 0, 7.05, 0, 0, 0, 23.698, 23.576, 0.566118, 70.3949)
+
+[node name="Ramp6" parent="." instance=ExtResource("5_036b0")]
+transform = Transform3D(39.865, 0, 0, 0, 2.92, 0, 0, 0, 23.698, 23.576, 0.768221, 47.1178)
 
 [node name="TeleExit" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.8015, 64.4799, 0)
 
 [node name="Teleporter" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("7_pkg7o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4175, 2.4616, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.93622, 3.78429, -7.69519)
 destination = NodePath("../TeleExit")
-set_view_angle = true
 set_view_right_deg = -102.032
 set_view_up_deg = -57.112
 

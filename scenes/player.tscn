@@ -6,10 +6,10 @@
 [ext_resource type="Resource" uid="uid://dtx5qwyorljnd" path="res://weapons/shotgun.tres" id="4_2hs0m"]
 [ext_resource type="Resource" uid="uid://c5auuuc62868f" path="res://weapons/flashlight.tres" id="5_qlg0r"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qlg0r"]
 height = 1.8
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tuyoq"]
 height = 1.8
 
 [node name="Player" type="CharacterBody3D"]
@@ -17,10 +17,10 @@ script = ExtResource("1_4flbx")
 weapons = Array[ExtResource("2_hqtel")]([ExtResource("3_sweqy"), ExtResource("4_2hs0m"), ExtResource("5_qlg0r")])
 
 [node name="ColBox" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_sh265")
+shape = SubResource("CapsuleShape3D_qlg0r")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_4flbx")
+mesh = SubResource("CapsuleMesh_tuyoq")
 
 [node name="Head" type="Node3D" parent="."]
 

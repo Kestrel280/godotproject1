@@ -9,6 +9,7 @@ const INCHES_PER_METER : float = 39.3701;
 var dt;
 var onGround : bool; # Player is on ground
 var outWishVel : Vector3; # Per-frame desired movement vector
+var lastCol : KinematicCollision3D; # Most recent collision; typically set by move_and_slide(), but may also be set by custom movement logic
 var player : Player;
 
 
@@ -19,24 +20,33 @@ func _init(_player : Player):
 func move(_dt : float) -> void:
 	dt = _dt;
 	outWishVel = Vector3(player.velocity);
-	outWishVel += player.get_gravity() * dt;
-	
+
 	if onGround:
-		if Input.is_action_pressed("jump") and _tryJump():
+		if (player.get_real_velocity().slide(lastCol.get_normal()).y > 0) && (player.get_real_velocity().slide(lastCol.get_normal()).y > player.jumpImpulse): # sliding quickly up a gentle slope
+			outWishVel = player.get_real_velocity().slide(lastCol.get_normal());
+			Globals.debug_box.text = "SLIDING";
+			_airMove();
+		elif Input.is_action_pressed("jump") and _tryJump():
+			Globals.debug_box.text = "JUMPING";
 			_airMove();
 		else:
+			Globals.debug_box.text = "WALKING";
 			_groundMove()
 	else:
+		Globals.debug_box.text = "AIRMOVING";
 		_airMove();
 		
 	player.velocity = outWishVel;
 	var collision = player.move_and_collide(player.velocity * dt, true); # TEST for collision, do not actually perform
 	if collision:
 		player.velocity = player.velocity.slide(collision.get_normal());
-		onGround = collision.get_normal().y > GROUND_NORMAL_THRESHOLD;
+		if collision.get_normal().y > GROUND_NORMAL_THRESHOLD: onGround = true;
+		lastCol = collision;
 	else:
 		onGround = false;
-	player.move_and_slide()
+	player.velocity += player.get_gravity() * dt;
+	if player.move_and_slide(): lastCol = player.get_last_slide_collision();
+	onGround = onGround || player.is_on_floor();
 
 	player.xy_speed = Vector2(player.velocity.x, player.velocity.z).length();
 	player.z_speed = player.velocity.y;
@@ -73,5 +83,6 @@ func _applyGroundAccel() -> void:
 	
 
 func _tryJump() -> bool:
+	print("JUMP ", player.velocity)
 	outWishVel.y = player.jumpImpulse;
 	return true;
