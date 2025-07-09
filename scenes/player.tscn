@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://4mbo3jq1qpdv"]
+[gd_scene load_steps=13 format=3 uid="uid://4mbo3jq1qpdv"]
 
 [ext_resource type="Script" uid="uid://bwhu3otek4i7" path="res://scenes/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="2_hqtel"]
@@ -7,24 +7,52 @@
 [ext_resource type="Resource" uid="uid://c5auuuc62868f" path="res://weapons/flashlight.tres" id="5_qlg0r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qlg0r"]
-height = 1.8
+height = 1.4
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_tuyoq"]
-height = 1.8
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tuyoq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjrip"]
+albedo_texture = SubResource("PlaceholderTexture2D_tuyoq")
+uv1_scale = Vector3(10, 10, 10)
+texture_filter = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_tuyoq"]
+material = SubResource("StandardMaterial3D_fjrip")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qlg0r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tuyoq"]
+albedo_texture = SubResource("PlaceholderTexture2D_qlg0r")
+uv1_scale = Vector3(5, 5, 5)
+texture_filter = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_qlg0r"]
+material = SubResource("StandardMaterial3D_tuyoq")
+radius = 0.25
+height = 0.5
 
 [node name="Player" type="CharacterBody3D"]
+safe_margin = 0.01
 script = ExtResource("1_4flbx")
 weapons = Array[ExtResource("2_hqtel")]([ExtResource("3_sweqy"), ExtResource("4_2hs0m"), ExtResource("5_qlg0r")])
 
 [node name="ColBox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+top_level = true
 shape = SubResource("CapsuleShape3D_qlg0r")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_tuyoq")
+layers = 2
+mesh = SubResource("SphereMesh_tuyoq")
 
 [node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
+cull_mask = 1048573
 
 [node name="WeaponContainer" type="Node3D" parent="Head"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.184659, -0.106542, -0.589557)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.405848, -0.106542, -0.589557)
+
+[node name="Model" type="MeshInstance3D" parent="Head"]
+mesh = SubResource("SphereMesh_qlg0r")

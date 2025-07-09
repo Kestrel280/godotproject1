@@ -86,6 +86,10 @@ secondary_fire={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_2="player_self"
+
 [physics]
 
 common/physics_ticks_per_second=67

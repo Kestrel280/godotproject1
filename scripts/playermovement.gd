@@ -23,7 +23,7 @@ func move(_dt : float) -> void:
 
 	if onGround:
 		if (player.get_real_velocity().slide(lastCol.get_normal()).y > 0) && (player.get_real_velocity().slide(lastCol.get_normal()).y > player.jumpImpulse): # sliding quickly up a gentle slope
-			outWishVel = player.get_real_velocity().slide(lastCol.get_normal());
+			outWishVel = player.velocity.slide(lastCol.get_normal());
 			Globals.debug_box.text = "SLIDING";
 			_airMove();
 		elif Input.is_action_pressed("jump") and _tryJump():
