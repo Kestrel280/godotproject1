@@ -11,12 +11,14 @@ func _ready() -> void:
 
 func _on_player_paused() -> void:
 	pauseMenuScene = pauseMenuScenePacked.instantiate();
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
 	get_tree().paused = true;
-	add_child(pauseMenuScene); # Replace with function body.
+	#PhysicsServer3D.set_active(false);
+	add_child(pauseMenuScene);
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
 
 
 func _on_game_ui_unpaused() -> void:
-	get_tree().paused = false;
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 	if pauseMenuScene: pauseMenuScene.queue_free();
+	get_tree().paused = false;
+	#PhysicsServer3D.set_active(true);
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);

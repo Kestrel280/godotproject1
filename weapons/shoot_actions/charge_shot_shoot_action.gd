@@ -15,7 +15,7 @@ func shoot(shooter : CharacterBody3D) -> void:
 	var base_light_energy : float = bullet.get_node("Light").light_energy;
 	var base_light_radius : float = bullet.get_node("Light").omni_range;
 	var impulse = 30.0;
-	while(charging):
+	while(charging and !Globals.paused):
 		await shooter.get_tree().physics_frame;
 		scale = min(scale + 0.04, 3.0);
 		bullet.get_node("Model").mesh.radius = base_radius * scale;
@@ -26,8 +26,8 @@ func shoot(shooter : CharacterBody3D) -> void:
 	var pos = bullet.global_position;
 	shooter.get_node("Head/WeaponContainer").remove_child(bullet);
 	bullet.position = Vector3.ZERO;
-	bullet.global_position = pos;
 	Globals.world.add_child(bullet);
+	bullet.set_global_position(pos);
 	bullet.launch(shooter.get_node("Head/WeaponContainer").global_basis.z, impulse * scale);
 
 
