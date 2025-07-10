@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://c5auuuc62868f"]
 
-[ext_resource type="PackedScene" uid="uid://qhakx35g640p" path="res://models/pistol.tscn" id="1_acjll"]
+[ext_resource type="PackedScene" uid="uid://b43droyp3opja" path="res://models/flashlight.tscn" id="1_acjll"]
 [ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="2_hig58"]
 [ext_resource type="Script" uid="uid://d38wdp6yp3660" path="res://weapons/shoot_actions/flashlight_shoot_action.gd" id="3_acjll"]
 

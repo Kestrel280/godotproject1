@@ -6,15 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://c76pos58ksu64" path="res://scenes/game_ui.tscn" id="3_lquwl"]
 
 [node name="Main" type="Node"]
+process_mode = 3
 script = ExtResource("1_1bvp3")
 
 [node name="World" parent="." instance=ExtResource("1_h2yge")]
+process_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_1bvp3")]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4538, 0)
 
 [node name="GameUi" parent="." instance=ExtResource("3_lquwl")]
+process_mode = 3
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="paused" from="Player" to="." method="_on_player_paused"]
-[connection signal="unpaused" from="Player" to="." method="_on_player_unpaused"]
+[connection signal="unpaused" from="GameUi" to="." method="_on_game_ui_unpaused"]

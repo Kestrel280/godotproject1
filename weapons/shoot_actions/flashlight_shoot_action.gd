@@ -1,18 +1,20 @@
 extends Node
 
 
-var shooter : CharacterBody3D;
 var _enabled : bool = false;
 var light : SpotLight3D;
 
 
-func shoot(_s : CharacterBody3D) -> void:
-	shooter = _s;
+func shoot(shooter : CharacterBody3D) -> void:
 	if _enabled: _turnOff();
-	else: _turnOn();
+	else: _turnOn(shooter);
 
 
-func _turnOn():
+func abort_shoot(shooter : CharacterBody3D) -> void:
+	_turnOff();
+
+
+func _turnOn(shooter : CharacterBody3D):
 	_enabled = true;
 	light = SpotLight3D.new();
 	light.spot_range = 40.0;

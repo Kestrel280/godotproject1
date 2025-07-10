@@ -12,7 +12,7 @@ class_name Weapon extends Resource
 
 
 var _loaded;
-var shoot_script_instance;
+var shoot_script_instance : Node;
 var in_shot_recovery : bool = false;
 
 
@@ -28,3 +28,13 @@ func try_shoot(shooter : CharacterBody3D):
 	in_shot_recovery = true;
 	await shooter.get_tree().create_timer(shot_interval).timeout
 	in_shot_recovery = false;
+
+
+func stop_shoot(shooter : CharacterBody3D):
+	if (!_loaded): _load();
+	if shoot_script_instance.has_method("stop_shoot"): shoot_script_instance.stop_shoot(shooter);
+
+
+func abort_shoot(shooter : CharacterBody3D):
+	if (!_loaded): _load();
+	if shoot_script_instance.has_method("abort_shoot"): shoot_script_instance.abort_shoot(shooter);

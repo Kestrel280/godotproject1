@@ -1,7 +1,6 @@
 class_name Player extends CharacterBody3D
 
 signal paused
-signal unpaused
 
 
 const MOUSE_SENSITIVITY = 0.0025; # TODO move to a globals/settings
@@ -20,7 +19,6 @@ var weapon : Weapon; # Currently equipped weapon
 var pm; # PlayerMove script
 var xy_speed; # XY (actually xz) speed of player, updated in _playerMove()
 var z_speed; # Z (actually Y) speed of player, updated in _playerMove();
-var inControl; # Player has control
 var rot_x = 0; # Cumulative rotation
 var rot_y = 0; # Cumulative rotation
 var inputDir : Vector3; # Direction of player's input (unit vector)
@@ -30,7 +28,6 @@ var dt; # Physics deltatime
 func _ready() -> void:
 	pm = load("res://scripts/playermovement.gd").new(self);
 	Globals.player = self;
-	_takeControl();
 	velocity = Vector3.ZERO;
 	return;
 
@@ -41,21 +38,23 @@ func _physics_process(delta: float) -> void:
 	inputDir = (self.transform.basis * Vector3(_inputDir2d.x, 0, _inputDir2d.y)).normalized();
 	if weapon:
 		if weapon.single_shot and Input.is_action_just_pressed("primary_fire"): weapon.try_shoot(self)
+		elif weapon.single_shot and Input.is_action_just_released("primary_fire"): weapon.stop_shoot(self);
 		elif (!weapon.single_shot) and Input.is_action_pressed("primary_fire"): weapon.try_shoot(self);
 	pm.move(dt);
 
 
 func _input(event):
 	if event is InputEventKey:
-		if Input.is_action_just_pressed("pause"):
-			if !inControl: _takeControl();
-			else: _releaseControl();
+		if Input.is_action_just_pressed("pause") and (!Globals.paused):
+			get_viewport().set_input_as_handled();
+			Globals.paused = true;
+			paused.emit();
 		elif Input.is_action_just_pressed("weapon0"): _equipWeapon(0);
 		elif Input.is_action_just_pressed("weapon1"): _equipWeapon(1);
 		elif Input.is_action_just_pressed("weapon2"): _equipWeapon(2);
+		elif Input.is_action_just_pressed("weapon3"): _equipWeapon(3);
 	elif event is InputEventMouseMotion:
-		if inControl:
-			_handleMouseMotionEvent(event);
+		_handleMouseMotionEvent(event);
 
 
 func _handleMouseMotionEvent(event):
@@ -69,22 +68,9 @@ func _handleMouseMotionEvent(event):
 	$Head.rotate_object_local(Vector3(1, 0, 0), rot_y);
 
 
-func _takeControl():
-	inControl = true;
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
-	set_physics_process(true);
-	unpaused.emit();
-
-
-func _releaseControl():
-	inControl = false;
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
-	set_physics_process(false);
-	paused.emit();
-	
-
 func _equipWeapon(idx : int) -> void:
 	if (idx >= weapons.size()): return;
+	if weapon: weapon.abort_shoot(self);
 	
 	for child in $Head/WeaponContainer.get_children():
 		$Head/WeaponContainer.remove_child(child);

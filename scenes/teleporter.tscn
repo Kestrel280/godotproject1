@@ -5,6 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_eumkw"]
 
 [node name="Teleporter" type="Area3D"]
+collision_mask = 2
 script = ExtResource("1_vurns")
 
 [node name="TriggerVolume" type="CollisionShape3D" parent="."]

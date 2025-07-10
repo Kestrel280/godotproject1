@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://cnuh0u8504fm2"]
+
+[ext_resource type="PackedScene" uid="uid://sq2ql1q1o4y6" path="res://models/chargegun.tscn" id="1_g4hsh"]
+[ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="2_vqvw0"]
+[ext_resource type="Script" uid="uid://bhtmc8ahylh43" path="res://weapons/shoot_actions/charge_shot_shoot_action.gd" id="3_g4hsh"]
+
+[resource]
+script = ExtResource("2_vqvw0")
+model = ExtResource("1_g4hsh")
+shoot_sound_path = ""
+ammo = 1
+shot_interval = 1.0
+single_shot = true
+shoot_script = ExtResource("3_g4hsh")
+metadata/_custom_type_script = "uid://drd4usvg41ymq"
