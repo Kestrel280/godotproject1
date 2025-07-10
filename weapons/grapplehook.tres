@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://bnsgpsyaqrxh4"]
+
+[ext_resource type="PackedScene" uid="uid://bgrslpe676mab" path="res://models/grapplehook.tscn" id="1_hbcai"]
+[ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="1_l8jmr"]
+[ext_resource type="Script" uid="uid://drjkeqg4367ni" path="res://weapons/shoot_actions/grapple_shoot_action.gd" id="3_kq0tu"]
+
+[resource]
+script = ExtResource("1_l8jmr")
+model = ExtResource("1_hbcai")
+shoot_sound_path = ""
+ammo = 1
+shot_interval = 0.1
+single_shot = true
+shoot_script = ExtResource("3_kq0tu")
+metadata/_custom_type_script = "uid://drd4usvg41ymq"

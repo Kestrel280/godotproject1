@@ -23,6 +23,9 @@ var rot_x = 0; # Cumulative rotation
 var rot_y = 0; # Cumulative rotation
 var inputDir : Vector3; # Direction of player's input (unit vector)
 var dt; # Physics deltatime
+var hooked : bool; # Whether or not the player is anchored to something using the grapplehook
+var hook_pos : Vector3; # If hooked, location of anchor
+var hook_lensq : float; # If hooked, squared length of hook
 
 
 func _ready() -> void:
@@ -53,6 +56,7 @@ func _input(event):
 		elif Input.is_action_just_pressed("weapon1"): _equipWeapon(1);
 		elif Input.is_action_just_pressed("weapon2"): _equipWeapon(2);
 		elif Input.is_action_just_pressed("weapon3"): _equipWeapon(3);
+		elif Input.is_action_just_pressed("weapon4"): _equipWeapon(4);
 	elif event is InputEventMouseMotion:
 		_handleMouseMotionEvent(event);
 
@@ -86,3 +90,17 @@ func set_view_angle(right : float, up : float) -> void:
 	self.rotate_object_local(Vector3(0, 1, 0), rot_x);
 	$Head.transform.basis = Basis();
 	$Head.rotate_object_local(Vector3(1, 0, 0), rot_y);
+
+
+func attach_hook(pos : Vector3):
+	hooked = true;
+	hook_pos = pos;
+	hook_lensq = self.global_position.distance_squared_to(pos);
+	print("attached hook with sqlen %5.1f at position " % hook_lensq, pos);
+
+
+func detach_hook():
+	hooked = false;
+	hook_lensq = 0;
+	hook_pos = Vector3.ZERO;
+	print("detached hook");

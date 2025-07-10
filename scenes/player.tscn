@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://4mbo3jq1qpdv"]
+[gd_scene load_steps=15 format=3 uid="uid://4mbo3jq1qpdv"]
 
 [ext_resource type="Script" uid="uid://bwhu3otek4i7" path="res://scenes/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://drd4usvg41ymq" path="res://scripts/weapon.gd" id="2_hqtel"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://dtx5qwyorljnd" path="res://weapons/smg.tres" id="4_2hs0m"]
 [ext_resource type="Resource" uid="uid://c5auuuc62868f" path="res://weapons/flashlight.tres" id="5_qlg0r"]
 [ext_resource type="Resource" uid="uid://cnuh0u8504fm2" path="res://weapons/chargegun.tres" id="6_tuyoq"]
+[ext_resource type="Resource" uid="uid://bnsgpsyaqrxh4" path="res://weapons/grapplehook.tres" id="7_fjrip"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qlg0r"]
 height = 1.4
@@ -36,7 +37,7 @@ height = 0.5
 collision_layer = 2
 safe_margin = 0.01
 script = ExtResource("1_4flbx")
-weapons = Array[ExtResource("2_hqtel")]([ExtResource("3_sweqy"), ExtResource("4_2hs0m"), ExtResource("5_qlg0r"), ExtResource("6_tuyoq")])
+weapons = Array[ExtResource("2_hqtel")]([ExtResource("3_sweqy"), ExtResource("4_2hs0m"), ExtResource("5_qlg0r"), ExtResource("6_tuyoq"), ExtResource("7_fjrip")])
 
 [node name="ColBox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgrslpe676mab"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2xb38"]
+top_radius = 0.025
+bottom_radius = 0.05
+height = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_10rpj"]
+size = Vector3(0.05, 0.12, 0.05)
+
+[node name="GrappleHook" type="Node3D"]
+
+[node name="Handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_2xb38")
+
+[node name="HookTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.957249, 0.289266, 0, -0.289266, 0.957249, 0, 0.066085, 0.107771)
+mesh = SubResource("BoxMesh_10rpj")
+
+[node name="HookBottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.957319, -0.289032, 0, 0.289032, 0.957319, 0, -0.066, 0.108)
+mesh = SubResource("BoxMesh_10rpj")
+
+[node name="HookLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.18458e-08, -0.957319, 0.289032, 1, -4.37114e-08, 0, 1.2634e-08, 0.289032, 0.957319, 0.066, 0, 0.108)
+mesh = SubResource("BoxMesh_10rpj")
+
+[node name="HookRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.18458e-08, -0.957319, -0.289032, 1, -4.37114e-08, 0, -1.2634e-08, -0.289032, 0.957319, -0.066, 0, 0.108)
+mesh = SubResource("BoxMesh_10rpj")
