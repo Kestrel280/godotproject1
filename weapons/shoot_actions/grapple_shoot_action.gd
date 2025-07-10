@@ -4,20 +4,6 @@ var RAY_LENGTH = 1000;
 var debug_sphere : MeshInstance3D;
 
 
-func _init() -> void:
-	var material = StandardMaterial3D.new();
-	material.albedo_color = Color(1.0, 1.0, 1.0, 1);
-	material.albedo_texture = load("res://textures/crosshair.png");
-	material.uv1_scale = Vector3(30, 30, 30);
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA;
-	material.cull_mode = BaseMaterial3D.CULL_DISABLED;
-	material.disable_receive_shadows = true;
-	debug_sphere = MeshInstance3D.new();
-	debug_sphere.mesh = SphereMesh.new();
-	debug_sphere.set_surface_override_material(0, material);
-	
-
-
 func shoot(shooter : CharacterBody3D) -> void:
 	if shooter.has_node("Head/WeaponContainer"):
 		var shooterHeadNode = shooter.get_node("Head");
@@ -32,10 +18,6 @@ func shoot(shooter : CharacterBody3D) -> void:
 		if (result):
 			if (shooter.has_method("attach_hook")):
 				shooter.attach_hook(result.position);
-				debug_sphere.mesh.height = shooter.hook_len * 2;
-				debug_sphere.mesh.radius = shooter.hook_len;
-				debug_sphere.position = result.position;
-				Globals.world.add_child(debug_sphere);
 
 
 func stop_shoot(shooter: CharacterBody3D) -> void:

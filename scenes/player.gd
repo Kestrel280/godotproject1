@@ -8,12 +8,16 @@ const MOUSE_SENSITIVITY = 0.0025; # TODO move to a globals/settings
 
 @export var groundFriction = 4;
 @export var jumpImpulse = 8;
-@export var airAccel = 1500;
+@export var airAccel = 500;
 @export var airSpeedCap = 30 / Globals.INCHES_PER_METER;
 @export var groundAccel = 5; # Ground acceleration
 @export var groundSpeedCap = 320 / Globals.INCHES_PER_METER; # Max walking speed on ground
 @export var weapons : Array[Weapon] = [];
-
+@export_range(1.0, 20.0) var hookStrength = 3; # How aggressively the hook pulls you toward it (m/s/s)
+@export_range(0.9, 1.0) var hookRangeShrinkRatio = 0.97; # How close the player needs to be to the hook anchor in order to shrink the hook length. Higher values are more forgiving
+@export_range(0.01, 0.1) var hookRangeShrinkRate = 0.04; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
+@export_range(0.0, 1.0) var hookAirAccelFactor = 0.18; # How much to reduce player's airaccel while hooked
+@export_range(100.0, 400.0) var hookMinLenSq = 200.0; # Smallest length (squared) to shrink hook to if player gets closer to it
 
 var weapon : Weapon; # Currently equipped weapon
 var pm; # PlayerMove script
@@ -27,6 +31,20 @@ var hooked : bool; # Whether or not the player is anchored to something using th
 var hook_pos : Vector3; # If hooked, location of anchor
 var hook_lensq : float; # If hooked, squared length of hook
 var hook_len : float; # If hooked, length of hook
+var debug_sphere : MeshInstance3D; # If hooked, debug sphere showing radius of hook
+
+
+func _init() -> void:
+	var material = StandardMaterial3D.new();
+	material.albedo_color = Color(1.0, 1.0, 1.0, 1);
+	material.albedo_texture = load("res://textures/crosshair.png");
+	material.uv1_scale = Vector3(30, 30, 30);
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA;
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED;
+	material.disable_receive_shadows = true;
+	debug_sphere = MeshInstance3D.new();
+	debug_sphere.mesh = SphereMesh.new();
+	debug_sphere.set_surface_override_material(0, material);
 
 
 func _ready() -> void:
@@ -45,6 +63,13 @@ func _physics_process(delta: float) -> void:
 		elif weapon.single_shot and Input.is_action_just_released("primary_fire"): weapon.stop_shoot(self);
 		elif (!weapon.single_shot) and Input.is_action_pressed("primary_fire"): weapon.try_shoot(self);
 	pm.move(dt);
+	print(hook_lensq)
+	if hooked and (hook_lensq > hookMinLenSq) and (position.distance_squared_to(hook_pos) < hook_lensq * hookRangeShrinkRatio):
+		hook_lensq = lerp(hook_lensq, position.distance_squared_to(hook_pos), hookRangeShrinkRate);
+		hook_len = sqrt(hook_lensq);
+		debug_sphere.mesh.height = hook_len * 2;
+		debug_sphere.mesh.radius = hook_len;
+	
 
 
 func _input(event):
@@ -95,15 +120,22 @@ func set_view_angle(right : float, up : float) -> void:
 
 func attach_hook(pos : Vector3):
 	hooked = true;
+	airAccel /= 10;
 	hook_pos = pos;
 	hook_lensq = self.global_position.distance_squared_to(pos);
 	hook_len = sqrt(hook_lensq);
 	print("attached hook with sqlen %5.1f at position " % hook_lensq, pos);
+	debug_sphere.mesh.height = hook_len * 2;
+	debug_sphere.mesh.radius = hook_len;
+	debug_sphere.position = pos;
+	Globals.world.add_child(debug_sphere);
 
 
 func detach_hook():
 	hooked = false;
+	airAccel *= 10;
 	hook_lensq = 0;
 	hook_len = 0;
 	hook_pos = Vector3.ZERO;
+	Globals.world.remove_child(debug_sphere);
 	print("detached hook");

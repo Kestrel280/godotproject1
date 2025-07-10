@@ -53,7 +53,7 @@ script = ExtResource("1_71j4m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.735603, -0.586657, 0.338705, -1.47454e-08, 0.499998, 0.866026, -0.677412, -0.637052, 0.3678, 0, 9.27462, 0)
-light_energy = 0.1
+light_energy = 0.4
 shadow_enabled = true
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -76,14 +76,53 @@ transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 23.2024, 22.2673,
 [node name="FloatingBox2" parent="." instance=ExtResource("4_aqk2v")]
 transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 3.448, 21.147, 14.446)
 
+[node name="FloatingBox15" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, -2.78151, 21.147, 45.8293)
+
+[node name="FloatingBox12" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 6.51993, 9.14539, -26.0107)
+
+[node name="FloatingBox13" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 32.986, 11.793, -10.6353)
+
+[node name="FloatingBox7" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(0.79, 0, 0, 0, 0.79, 0, 0, 0, 0.79, 3.5646, 9.65662, 14.8238)
+
+[node name="FloatingBox14" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(0.79, 0, 0, 0, 0.79, 0, 0, 0, 0.79, -15.6289, 12.7846, 0.615582)
+
 [node name="FloatingBox3" parent="." instance=ExtResource("4_aqk2v")]
 transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 11.4417, 30.4525, 33.702)
 
 [node name="FloatingBox4" parent="." instance=ExtResource("4_aqk2v")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -47.0975, 63.4251, 33.702)
 
+[node name="FloatingBox16" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 13.4275, 63.4251, -29.5026)
+
+[node name="FloatingBox17" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -29.4348, 66.1803, -13.3127)
+
+[node name="FloatingBox18" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -13.6282, 62.9416, 13.687)
+
+[node name="FloatingBox19" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 21.4074, 52.5337, 30.6456)
+
 [node name="FloatingBox5" parent="." instance=ExtResource("4_aqk2v")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -38.9234, 49.3865, 56.7591)
+
+[node name="FloatingBox8" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 34.7941, 32.5182, 15.8309)
+
+[node name="FloatingBox10" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 20.353, 29.8762, -41.5364)
+
+[node name="FloatingBox11" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -13.2972, 15.225, -22.3507)
+
+[node name="FloatingBox9" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 30.0531, 21.5109, 62.6861)
 
 [node name="FloatingBox6" parent="." instance=ExtResource("4_aqk2v")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -84.8553, 45.1892, -45.1137)
@@ -108,7 +147,7 @@ transform = Transform3D(39.865, 0, 0, 0, 2.92, 0, 0, 0, 23.698, 23.576, 0.768221
 
 [node name="TeleExit" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.8015, 64.4799, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.9347, 94.8478, 35.3461)
 
 [node name="Teleporter" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("7_pkg7o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.93622, 3.78429, -7.69519)
