@@ -26,6 +26,7 @@ var dt; # Physics deltatime
 var hooked : bool; # Whether or not the player is anchored to something using the grapplehook
 var hook_pos : Vector3; # If hooked, location of anchor
 var hook_lensq : float; # If hooked, squared length of hook
+var hook_len : float; # If hooked, length of hook
 
 
 func _ready() -> void:
@@ -96,11 +97,13 @@ func attach_hook(pos : Vector3):
 	hooked = true;
 	hook_pos = pos;
 	hook_lensq = self.global_position.distance_squared_to(pos);
+	hook_len = sqrt(hook_lensq);
 	print("attached hook with sqlen %5.1f at position " % hook_lensq, pos);
 
 
 func detach_hook():
 	hooked = false;
 	hook_lensq = 0;
+	hook_len = 0;
 	hook_pos = Vector3.ZERO;
 	print("detached hook");

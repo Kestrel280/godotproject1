@@ -45,8 +45,16 @@ func move(_dt : float) -> void:
 	else:
 		onGround = false;
 	player.velocity += player.get_gravity() * dt;
+	
 	if player.move_and_slide(): lastCol = player.get_last_slide_collision();
 	onGround = onGround || player.is_on_floor();
+
+	if player.hooked:
+		Globals.debug_box.text += " | HOOKED";
+		if player.position.distance_squared_to(player.hook_pos) > player.hook_lensq:
+			var hook_to_player_unit_vector = (player.position - player.hook_pos).normalized();
+			player.position = player.hook_pos + hook_to_player_unit_vector * player.hook_len;
+			player.velocity = player.velocity.slide(hook_to_player_unit_vector);
 
 	player.xy_speed = Vector2(player.velocity.x, player.velocity.z).length();
 	player.z_speed = player.velocity.y;
