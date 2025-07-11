@@ -184,6 +184,7 @@ shape = SubResource("BoxShape3D_pkg7o")
 
 [node name="Skin" parent="Main_Area/WhopTele" index="1"]
 material_override = SubResource("StandardMaterial3D_pkg7o")
+cast_shadow = 0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Main_Area"]
 transform = Transform3D(0.999989, 0.00462511, 0, -0.00462511, 0.999989, 0, 0, 0, 1, 2.79724, 3.8053, -8.207)
@@ -210,7 +211,7 @@ shadow_enabled = true
 environment = SubResource("Environment_tlwt5")
 
 [node name="Obstacle_Course_Area" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 235.416, 189.276, 40.703)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 235.416, 189.276, 208.881)
 
 [node name="Start_Platform" type="StaticBody3D" parent="Obstacle_Course_Area"]
 
