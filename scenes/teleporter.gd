@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func _on_body_entered(character: CharacterBody3D) -> void:
-	character.position = destination.position;
+	character.global_position = destination.global_position;
 	if !preserve_xy_velocity:
 		character.velocity.x = 0;
 		character.velocity.z = 0;

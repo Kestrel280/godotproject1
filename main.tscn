@@ -14,7 +14,7 @@ process_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_1bvp3")]
 process_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4538, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3394, 4.4538, 1.61053)
 
 [node name="GameUi" parent="." instance=ExtResource("3_lquwl")]
 process_mode = 3

@@ -14,8 +14,8 @@ const MOUSE_SENSITIVITY = 0.0025; # TODO move to a globals/settings
 @export var groundSpeedCap = 320 / Globals.INCHES_PER_METER; # Max walking speed on ground
 @export var weapons : Array[Weapon] = [];
 @export_range(1.0, 20.0) var hookStrength = 3; # How aggressively the hook pulls you toward it (m/s/s)
-@export_range(0.9, 1.0) var hookRangeShrinkRatio = 0.97; # How close the player needs to be to the hook anchor in order to shrink the hook length. Higher values are more forgiving
-@export_range(0.01, 0.1) var hookRangeShrinkRate = 0.04; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
+@export_range(0.9, 1.0) var hookRangeShrinkRatio = 0.975; # How close the player needs to be to the hook anchor in order to shrink the hook length. Higher values are more forgiving
+@export_range(0.01, 0.3) var hookRangeShrinkRate = 0.2; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
 @export_range(0.0, 1.0) var hookAirAccelFactor = 0.18; # How much to reduce player's airaccel while hooked
 @export_range(100.0, 400.0) var hookMinLenSq = 200.0; # Smallest length (squared) to shrink hook to if player gets closer to it
 
@@ -50,7 +50,7 @@ func _init() -> void:
 func _ready() -> void:
 	pm = load("res://scripts/playermovement.gd").new(self);
 	Globals.player = self;
-	velocity = Vector3.ZERO;
+	#velocity = Vector3.ZERO;
 	return;
 
 
@@ -63,7 +63,6 @@ func _physics_process(delta: float) -> void:
 		elif weapon.single_shot and Input.is_action_just_released("primary_fire"): weapon.stop_shoot(self);
 		elif (!weapon.single_shot) and Input.is_action_pressed("primary_fire"): weapon.try_shoot(self);
 	pm.move(dt);
-	print(hook_lensq)
 	if hooked and (hook_lensq > hookMinLenSq) and (position.distance_squared_to(hook_pos) < hook_lensq * hookRangeShrinkRatio):
 		hook_lensq = lerp(hook_lensq, position.distance_squared_to(hook_pos), hookRangeShrinkRate);
 		hook_len = sqrt(hook_lensq);

@@ -1,6 +1,6 @@
 extends Node3D
 
-var RAY_LENGTH = 1000;
+var GRAPPLE_RANGE = 50; # TODO export this as an adjustable param
 var debug_sphere : MeshInstance3D;
 
 
@@ -10,7 +10,7 @@ func shoot(shooter : CharacterBody3D) -> void:
 		var shooterWeapNode = shooter.get_node("Head/WeaponContainer");
 		var space_state = shooterHeadNode.get_world_3d().direct_space_state;
 		var origin = shooterHeadNode.global_position;
-		var target = shooterHeadNode.global_position - RAY_LENGTH * shooterHeadNode.global_transform.basis.z;
+		var target = shooterHeadNode.global_position - GRAPPLE_RANGE * shooterHeadNode.global_transform.basis.z;
 		var query = PhysicsRayQueryParameters3D.create(origin, target);
 		query.collide_with_areas = true;
 		query.exclude = [shooter];
