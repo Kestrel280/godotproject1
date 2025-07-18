@@ -6,28 +6,28 @@ signal paused
 const MOUSE_SENSITIVITY = 0.0015; # TODO move to a globals/settings
 
 
-@export var groundFriction = 4;
-@export var jumpImpulse = 8;
-@export var airAccel = 500;
-@export var airSpeedCap = 30 / Globals.INCHES_PER_METER;
-@export var groundAccel = 5; # Ground acceleration
-@export var groundSpeedCap = 320 / Globals.INCHES_PER_METER; # Max walking speed on ground
+@export var groundFriction : float = 4.0;
+@export var jumpImpulse : float = 8.0;
+@export var airAccel : float = 500.0;
+@export var airSpeedCap : float = 30.0 / Globals.INCHES_PER_METER;
+@export var groundAccel : float = 5.0; # Ground acceleration
+@export var groundSpeedCap : float = 320.0 / Globals.INCHES_PER_METER; # Max walking speed on ground
 @export var weapons : Array[Weapon] = [];
-@export_range(0.0, 2500.0) var hookStrength = 1250; # Amount the player can influence their movement while grappling
-@export_range(0.9, 1.0) var hookRangeShrinkRatio = 0.975; # How close the player needs to be to the hook anchor in order to shrink the hook length. Higher values are more forgiving
-@export_range(0.01, 0.3) var hookRangeShrinkRate = 0.18; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
-@export_range(0.0, 1.0) var hookAirAccelFactor = 0.18; # How much to reduce player's airaccel while hooked
-@export_range(100.0, 400.0) var hookMinLenSq = 200.0; # Smallest length (squared) to shrink hook to if player gets closer to it
+@export_range(0.0, 2500.0) var hookStrength = 1250.0; # Amount the player can influence their movement while grappling
+@export_range(0.9, 1.0) var hookRangeShrinkRatio : float = 0.965; # How close the player needs to be to the hook anchor in order to shrink the hook length. Higher values are more forgiving
+@export_range(0.0, 5.0) var hookRangeShrinkRate : float = 3.0; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
+@export_range(0.0, 1.0) var hookAirAccelFactor : float = 0.18; # How much to reduce player's airaccel while hooked
+@export_range(100.0, 400.0) var hookMinLenSq : float = 200.0; # Smallest length (squared) to shrink hook to if player gets closer to it
 
 var weapon : Weapon; # Currently equipped weapon
-var pm; # PlayerMove script
-var xy_speed; # XY (actually xz) speed of player, updated in _playerMove()
-var z_speed; # Z (actually Y) speed of player, updated in _playerMove();
-var rot_x = 0; # Cumulative rotation
-var rot_y = 0; # Cumulative rotation
+var pm : Node; # PlayerMove script
+var xy_speed : float; # XY (actually xz) speed of player, updated in _playerMove()
+var z_speed : float; # Z (actually Y) speed of player, updated in _playerMove();
+var rot_x : float = 0.0; # Cumulative player rotation
+var rot_y : float = 0.0; # Cumulative player rotation
 var inputDir : Vector3; # Direction of player's input (unit vector), flattened to XY plane
 var inputDir3 : Vector3; # Direction of player's input (unit vector), no flattening -- includes vertical component
-var dt; # Physics deltatime
+var dt : float; # Physics deltatime
 var hooked : bool; # Whether or not the player is anchored to something using the grapplehook
 var hook_pos : Vector3; # If hooked, location of anchor
 var hook_lensq : float; # If hooked, squared length of hook
@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		elif (!weapon.single_shot) and Input.is_action_pressed("primary_fire"): weapon.try_shoot(self);
 	pm.move(dt);
 	if hooked and (hook_lensq > hookMinLenSq) and (position.distance_squared_to(hook_pos) < hook_lensq * hookRangeShrinkRatio):
-		hook_lensq = lerp(hook_lensq, position.distance_squared_to(hook_pos), hookRangeShrinkRate);
+		hook_lensq = lerp(hook_lensq, position.distance_squared_to(hook_pos), hookRangeShrinkRate * delta);
 		hook_len = sqrt(hook_lensq);
 		debug_sphere.mesh.height = hook_len * 2;
 		debug_sphere.mesh.radius = hook_len;
