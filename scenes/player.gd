@@ -13,7 +13,7 @@ const MOUSE_SENSITIVITY = 0.0015; # TODO move to a globals/settings
 @export var groundAccel = 5; # Ground acceleration
 @export var groundSpeedCap = 320 / Globals.INCHES_PER_METER; # Max walking speed on ground
 @export var weapons : Array[Weapon] = [];
-@export_range(1.0, 20.0) var hookStrength = 3; # How aggressively the hook pulls you toward it (m/s/s)
+@export_range(0.0, 2500.0) var hookStrength = 1250; # Amount the player can influence their movement while grappling
 @export_range(0.9, 1.0) var hookRangeShrinkRatio = 0.975; # How close the player needs to be to the hook anchor in order to shrink the hook length. Higher values are more forgiving
 @export_range(0.01, 0.3) var hookRangeShrinkRate = 0.18; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
 @export_range(0.0, 1.0) var hookAirAccelFactor = 0.18; # How much to reduce player's airaccel while hooked
@@ -25,7 +25,8 @@ var xy_speed; # XY (actually xz) speed of player, updated in _playerMove()
 var z_speed; # Z (actually Y) speed of player, updated in _playerMove();
 var rot_x = 0; # Cumulative rotation
 var rot_y = 0; # Cumulative rotation
-var inputDir : Vector3; # Direction of player's input (unit vector)
+var inputDir : Vector3; # Direction of player's input (unit vector), flattened to XY plane
+var inputDir3 : Vector3; # Direction of player's input (unit vector), no flattening -- includes vertical component
 var dt; # Physics deltatime
 var hooked : bool; # Whether or not the player is anchored to something using the grapplehook
 var hook_pos : Vector3; # If hooked, location of anchor
@@ -58,6 +59,7 @@ func _physics_process(delta: float) -> void:
 	dt = delta;
 	var _inputDir2d = Input.get_vector("move_left", "move_right", "move_forward", "move_backward");
 	inputDir = (self.transform.basis * Vector3(_inputDir2d.x, 0, _inputDir2d.y)).normalized();
+	inputDir3 = (self.transform.basis * $Head.transform.basis * Vector3(_inputDir2d.x, 0, _inputDir2d.y)).normalized();
 	if weapon:
 		if weapon.single_shot and Input.is_action_just_pressed("primary_fire"): weapon.try_shoot(self)
 		elif weapon.single_shot and Input.is_action_just_released("primary_fire"): weapon.stop_shoot(self);
@@ -68,7 +70,6 @@ func _physics_process(delta: float) -> void:
 		hook_len = sqrt(hook_lensq);
 		debug_sphere.mesh.height = hook_len * 2;
 		debug_sphere.mesh.radius = hook_len;
-	
 
 
 func _input(event):

@@ -75,7 +75,8 @@ func _airMove():
 
 func _airMoveHooked():
 	var hook_to_player_unit_vector = (player.position - player.hook_pos).normalized();
-	outWishVel += -player.hookStrength * hook_to_player_unit_vector * dt;
+	var speedPenaltyFactor = 1 / (player.velocity.length_squared() + player.jumpImpulse**2);
+	outWishVel += player.inputDir3 * player.hookStrength * dt * speedPenaltyFactor;
 
 
 func _groundMove() -> void:
