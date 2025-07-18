@@ -3,7 +3,7 @@ class_name Player extends CharacterBody3D
 signal paused
 
 
-const MOUSE_SENSITIVITY = 0.0025; # TODO move to a globals/settings
+const MOUSE_SENSITIVITY = 0.0015; # TODO move to a globals/settings
 
 
 @export var groundFriction = 4;
@@ -15,7 +15,7 @@ const MOUSE_SENSITIVITY = 0.0025; # TODO move to a globals/settings
 @export var weapons : Array[Weapon] = [];
 @export_range(1.0, 20.0) var hookStrength = 3; # How aggressively the hook pulls you toward it (m/s/s)
 @export_range(0.9, 1.0) var hookRangeShrinkRatio = 0.975; # How close the player needs to be to the hook anchor in order to shrink the hook length. Higher values are more forgiving
-@export_range(0.01, 0.3) var hookRangeShrinkRate = 0.2; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
+@export_range(0.01, 0.3) var hookRangeShrinkRate = 0.18; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
 @export_range(0.0, 1.0) var hookAirAccelFactor = 0.18; # How much to reduce player's airaccel while hooked
 @export_range(100.0, 400.0) var hookMinLenSq = 200.0; # Smallest length (squared) to shrink hook to if player gets closer to it
 

@@ -240,13 +240,13 @@ transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, 9.5)
 transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, -9.5)
 
 [node name="GrapplePoint1" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -30, 5, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -30, 15, 0)
 
 [node name="GrapplePoint2" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -75, 5, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -75, 15, 0)
 
 [node name="GrapplePoint3" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -150, 4.889, 0.025)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -150, 15, 0.025)
 
 [node name="Ramp" parent="Obstacle_Course_Area" instance=ExtResource("5_036b0")]
 transform = Transform3D(-1.31134e-06, 0, 100, 0, 20, 0, -30, 0, -4.37114e-06, -320, -55, 15)

@@ -33,9 +33,13 @@ func move(_dt : float) -> void:
 			Globals.debug_box.text = "WALKING";
 			_groundMove()
 	else:
-		Globals.debug_box.text = "AIRMOVING";
-		_airMove();
-		
+		if player.hooked:
+			Globals.debug_box.text = "HOOKED";
+			_airMoveHooked();
+		else:	
+			Globals.debug_box.text = "AIRMOVING";
+			_airMove()
+
 	player.velocity = outWishVel;
 	var collision = player.move_and_collide(player.velocity * dt, true); # TEST for collision, do not actually perform
 	if collision:
@@ -50,14 +54,11 @@ func move(_dt : float) -> void:
 	if player.move_and_slide(): lastCol = player.get_last_slide_collision();
 	onGround = onGround || player.is_on_floor();
 
-	# If hooked, apply some pulling force, and keep player from exceeding range of hook
-	if player.hooked:
-		Globals.debug_box.text += " | HOOKED";
+	# If hooked, keep player from exceeding range of hook
+	if player.hooked and player.position.distance_squared_to(player.hook_pos) > player.hook_lensq:
 		var hook_to_player_unit_vector = (player.position - player.hook_pos).normalized();
-		player.velocity += -player.hookStrength * hook_to_player_unit_vector * dt;
-		if player.position.distance_squared_to(player.hook_pos) > player.hook_lensq:
-			player.position = player.hook_pos + hook_to_player_unit_vector * player.hook_len;
-			player.velocity = player.velocity.slide(hook_to_player_unit_vector);
+		player.position = player.hook_pos + hook_to_player_unit_vector * player.hook_len;
+		player.velocity = player.velocity.slide(hook_to_player_unit_vector);;
 
 	player.xy_speed = Vector2(player.velocity.x, player.velocity.z).length();
 	player.z_speed = player.velocity.y;
@@ -70,6 +71,11 @@ func _airMove():
 	var maxSpeedToAdd = max(0, player.airSpeedCap - curSpeedInInputDir);
 	var speedToAddInInputDir = clampf(player.airAccel * player.airSpeedCap * dt, 0.0, maxSpeedToAdd); # TODO multiplication by airSpeedCap should probably be an analog value
 	outWishVel += speedToAddInInputDir * player.inputDir;
+
+
+func _airMoveHooked():
+	var hook_to_player_unit_vector = (player.position - player.hook_pos).normalized();
+	outWishVel += -player.hookStrength * hook_to_player_unit_vector * dt;
 
 
 func _groundMove() -> void:
