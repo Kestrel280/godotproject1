@@ -51,7 +51,6 @@ func _init() -> void:
 func _ready() -> void:
 	pm = load("res://scripts/playermovement.gd").new(self);
 	Globals.player = self;
-	#velocity = Vector3.ZERO;
 	return;
 
 
@@ -92,10 +91,7 @@ func _handleMouseMotionEvent(event):
 	rot_y -= event.relative.y * MOUSE_SENSITIVITY;
 	rot_x = wrapf(rot_x, -PI, PI);
 	rot_y = clampf(rot_y, -PI/2, PI/2);
-	self.transform.basis = Basis();
-	self.rotate_object_local(Vector3(0, 1, 0), rot_x);
-	$Head.transform.basis = Basis();
-	$Head.rotate_object_local(Vector3(1, 0, 0), rot_y);
+	set_view_angle(rot_x, rot_y);
 
 
 func _equipWeapon(idx : int) -> void:
@@ -120,7 +116,6 @@ func set_view_angle(right : float, up : float) -> void:
 
 func attach_hook(pos : Vector3):
 	hooked = true;
-	airAccel /= 10;
 	hook_pos = pos;
 	hook_lensq = self.global_position.distance_squared_to(pos);
 	hook_len = sqrt(hook_lensq);
@@ -133,7 +128,6 @@ func attach_hook(pos : Vector3):
 
 func detach_hook():
 	hooked = false;
-	airAccel *= 10;
 	hook_lensq = 0;
 	hook_len = 0;
 	hook_pos = Vector3.ZERO;
