@@ -17,4 +17,4 @@ func _input(event):
 
 
 func _process(delta: float) -> void:
-	$SpeedBox/SpeedLabel.text = "%.1f | %.1f" % [Globals.player.xy_speed / 0.0254, Globals.player.z_speed / 0.0254];
+	$SpeedBox/SpeedLabel.text = "%.1f | %.1f | %.1f" % [Globals.player.xy_speed * Globals.INCHES_PER_METER, Globals.player.z_speed * Globals.INCHES_PER_METER, Globals.player.kinetic_energy];

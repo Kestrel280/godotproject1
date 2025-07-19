@@ -40,6 +40,7 @@ func move(_dt : float) -> void:
 			Globals.debug_box.text = "AIRMOVING";
 			_airMove()
 
+	outWishVel += player.get_gravity() * player.gravity_scale * dt;
 	player.velocity = outWishVel;
 	var collision = player.move_and_collide(player.velocity * dt, true); # TEST for collision, do not actually perform
 	if collision:
@@ -48,20 +49,14 @@ func move(_dt : float) -> void:
 		lastCol = collision;
 	else:
 		onGround = false;
-	player.velocity += player.get_gravity() * dt;
 	
 	# Do the movement
 	if player.move_and_slide(): lastCol = player.get_last_slide_collision();
 	onGround = onGround || player.is_on_floor();
 
-	# If hooked, keep player from exceeding range of hook
-	if player.hooked and player.position.distance_squared_to(player.hook_pos) > player.hook_lensq:
-		var hook_to_player_unit_vector = (player.position - player.hook_pos).normalized();
-		player.position = player.hook_pos + hook_to_player_unit_vector * player.hook_len;
-		player.velocity = player.velocity.slide(hook_to_player_unit_vector);;
-
 	player.xy_speed = Vector2(player.velocity.x, player.velocity.z).length();
 	player.z_speed = player.velocity.y;
+	player.kinetic_energy = player.velocity.length_squared() / 2 + player.global_position.y * ProjectSettings.get_setting("physics/3d/default_gravity") * player.gravity_scale;
 	
 	return;
 
@@ -75,8 +70,17 @@ func _airMove():
 
 func _airMoveHooked():
 	var hook_to_player_unit_vector = (player.position - player.hook_pos).normalized();
-	var speedPenaltyFactor = 1 / (player.velocity.length_squared() + player.jumpImpulse**2);
-	outWishVel += player.inputDir3 * player.hookStrength * dt * speedPenaltyFactor;
+
+	# If we're along the surface of the hook's sphere of influence:
+	if player.position.distance_squared_to(player.hook_pos) > player.hook_lensq:
+	# 	(1) keep player from exceeding range of hook
+	# 	(2) Slide the movement vector along the surface of the sphere
+	# 	(3) If sliding smoothly along the sphere, apply adjustment factor to preserve speed/avoid 
+		player.position = player.hook_pos + hook_to_player_unit_vector * player.hook_len; # (1)
+		var sqPreAdjustSpeed = outWishVel.length_squared();
+		outWishVel = outWishVel.slide(hook_to_player_unit_vector); # (2)
+		var sqSpeedLossRatio = outWishVel.length_squared() / sqPreAdjustSpeed;
+		if sqSpeedLossRatio > 0.95: outWishVel /= sqrt(sqSpeedLossRatio); # (3)
 
 
 func _groundMove() -> void:

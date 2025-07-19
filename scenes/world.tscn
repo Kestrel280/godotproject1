@@ -214,6 +214,7 @@ environment = SubResource("Environment_tlwt5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 235.416, 189.276, 208.881)
 
 [node name="Start_Platform" type="StaticBody3D" parent="Obstacle_Course_Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2994, 9.10669, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle_Course_Area/Start_Platform"]
 shape = SubResource("BoxShape3D_4mrxx")
@@ -224,6 +225,12 @@ mesh = SubResource("BoxMesh_7r4gi")
 [node name="TeleExit" type="Node3D" parent="Obstacle_Course_Area/Start_Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
+[node name="StartPillar1" parent="Obstacle_Course_Area/Start_Platform" instance=ExtResource("4_aqk2v")]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, 9.5)
+
+[node name="StartPillar2" parent="Obstacle_Course_Area/Start_Platform" instance=ExtResource("4_aqk2v")]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, -9.5)
+
 [node name="End_Platform" type="StaticBody3D" parent="Obstacle_Course_Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -430, -65, -25)
 
@@ -233,20 +240,14 @@ shape = SubResource("BoxShape3D_qfnet")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle_Course_Area/End_Platform"]
 mesh = SubResource("BoxMesh_i7141")
 
-[node name="StartPillar1" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, 9.5)
-
-[node name="StartPillar2" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, -9.5)
-
 [node name="GrapplePoint1" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -30, 15, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -36.4487, 15, 0)
 
 [node name="GrapplePoint2" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -75, 15, 0)
 
 [node name="GrapplePoint3" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -150, 15, 0.025)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -135.273, 15, 0.0249939)
 
 [node name="Ramp" parent="Obstacle_Course_Area" instance=ExtResource("5_036b0")]
 transform = Transform3D(-1.31134e-06, 0, 100, 0, 20, 0, -30, 0, -4.37114e-06, -320, -55, 15)

@@ -13,16 +13,14 @@ const MOUSE_SENSITIVITY = 0.0015; # TODO move to a globals/settings
 @export var groundAccel : float = 5.0; # Ground acceleration
 @export var groundSpeedCap : float = 320.0 / Globals.INCHES_PER_METER; # Max walking speed on ground
 @export var weapons : Array[Weapon] = [];
-@export_range(0.0, 2500.0) var hookStrength = 1250.0; # Amount the player can influence their movement while grappling
-@export_range(0.9, 1.0) var hookRangeShrinkRatio : float = 0.965; # How close the player needs to be to the hook anchor in order to shrink the hook length. Higher values are more forgiving
-@export_range(0.0, 5.0) var hookRangeShrinkRate : float = 3.0; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
-@export_range(0.0, 1.0) var hookAirAccelFactor : float = 0.18; # How much to reduce player's airaccel while hooked
+@export_range(0.0, 10.0) var hookRangeShrinkRate : float = 5.0; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
 @export_range(100.0, 400.0) var hookMinLenSq : float = 200.0; # Smallest length (squared) to shrink hook to if player gets closer to it
 
 var weapon : Weapon; # Currently equipped weapon
 var pm : Node; # PlayerMove script
 var xy_speed : float; # XY (actually xz) speed of player, updated in _playerMove()
-var z_speed : float; # Z (actually Y) speed of player, updated in _playerMove();
+var z_speed : float; # Z (actually Y) speed of player, updated in _playerMove()
+var kinetic_energy : float; # Kinetic energy of player, updated in _playerMove() (v^2/2 + gh)
 var rot_x : float = 0.0; # Cumulative player rotation
 var rot_y : float = 0.0; # Cumulative player rotation
 var inputDir : Vector3; # Direction of player's input (unit vector), flattened to XY plane
@@ -33,6 +31,7 @@ var hook_pos : Vector3; # If hooked, location of anchor
 var hook_lensq : float; # If hooked, squared length of hook
 var hook_len : float; # If hooked, length of hook
 var debug_sphere : MeshInstance3D; # If hooked, debug sphere showing radius of hook
+var gravity_scale : float = 1.0; # gravity scale
 
 
 func _init() -> void:
@@ -51,7 +50,6 @@ func _init() -> void:
 func _ready() -> void:
 	pm = load("res://scripts/playermovement.gd").new(self);
 	Globals.player = self;
-	return;
 
 
 func _physics_process(delta: float) -> void:
@@ -64,7 +62,7 @@ func _physics_process(delta: float) -> void:
 		elif weapon.single_shot and Input.is_action_just_released("primary_fire"): weapon.stop_shoot(self);
 		elif (!weapon.single_shot) and Input.is_action_pressed("primary_fire"): weapon.try_shoot(self);
 	pm.move(dt);
-	if hooked and (hook_lensq > hookMinLenSq) and (position.distance_squared_to(hook_pos) < hook_lensq * hookRangeShrinkRatio):
+	if hooked and (hook_lensq > hookMinLenSq) and (position.distance_squared_to(hook_pos) < hook_lensq):
 		hook_lensq = lerp(hook_lensq, position.distance_squared_to(hook_pos), hookRangeShrinkRate * delta);
 		hook_len = sqrt(hook_lensq);
 		debug_sphere.mesh.height = hook_len * 2;
@@ -119,7 +117,7 @@ func attach_hook(pos : Vector3):
 	hook_pos = pos;
 	hook_lensq = self.global_position.distance_squared_to(pos);
 	hook_len = sqrt(hook_lensq);
-	print("attached hook with sqlen %5.1f at position " % hook_lensq, pos);
+	
 	debug_sphere.mesh.height = hook_len * 2;
 	debug_sphere.mesh.radius = hook_len;
 	debug_sphere.position = pos;
@@ -132,4 +130,3 @@ func detach_hook():
 	hook_len = 0;
 	hook_pos = Vector3.ZERO;
 	Globals.world.remove_child(debug_sphere);
-	print("detached hook");
