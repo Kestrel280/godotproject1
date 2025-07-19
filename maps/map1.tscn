@@ -1,16 +1,22 @@
 [gd_scene load_steps=24 format=3 uid="uid://on6rtx26b35i"]
 
-[ext_resource type="Script" uid="uid://csxy6ngpydymw" path="res://scenes/world.gd" id="1_71j4m"]
-[ext_resource type="Texture2D" uid="uid://cir7c7eml2lmo" path="res://textures/__face_debug.png" id="2_pkg7o"]
-[ext_resource type="PackedScene" uid="uid://coaecjmpu04b" path="res://prefabs/box.tscn" id="4_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://c007o8nr32axm" path="res://prefabs/ramp.tscn" id="5_036b0"]
-[ext_resource type="PackedScene" uid="uid://cv73x563v8fyl" path="res://scenes/teleporter.tscn" id="7_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://cir7c7eml2lmo" path="res://textures/__face_debug.png" id="1_7dfyu"]
+[ext_resource type="PackedScene" uid="uid://coaecjmpu04b" path="res://prefabs/box.tscn" id="2_17ebq"]
+[ext_resource type="PackedScene" uid="uid://c007o8nr32axm" path="res://prefabs/ramp.tscn" id="3_nxseg"]
+[ext_resource type="PackedScene" uid="uid://cv73x563v8fyl" path="res://scenes/teleporter.tscn" id="4_lo85r"]
+
+[sub_resource type="GDScript" id="GDScript_iu4sv"]
+script/source = "extends Node3D
+
+func _ready():
+	Globals.world = self;
+"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 size = Vector3(300, 2, 300)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
-albedo_texture = ExtResource("2_pkg7o")
+albedo_texture = ExtResource("1_7dfyu")
 uv1_scale = Vector3(50, 50, 50)
 
 [sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
@@ -78,8 +84,8 @@ size = Vector3(250, 1, 150)
 transparency = 1
 albedo_color = Color(0.984314, 0.105882, 0, 0.4)
 
-[node name="World" type="Node3D"]
-script = ExtResource("1_71j4m")
+[node name="Map1" type="Node3D"]
+script = SubResource("GDScript_iu4sv")
 
 [node name="Main_Area" type="Node3D" parent="."]
 
@@ -91,89 +97,89 @@ shape = SubResource("BoxShape3D_gv5m4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Main_Area/Floor"]
 mesh = SubResource("BoxMesh_f3sb7")
 
-[node name="Box" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="Box" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.29295, 1.52656, -4.49453)
 
-[node name="FloatingBox1" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox1" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 23.2024, 22.2673, 3.68025)
 
-[node name="FloatingBox2" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox2" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 3.448, 21.147, 14.446)
 
-[node name="FloatingBox15" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox15" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, -2.78151, 21.147, 45.8293)
 
-[node name="FloatingBox12" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox12" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 6.51993, 9.14539, -26.0107)
 
-[node name="FloatingBox13" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox13" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 32.986, 11.793, -10.6353)
 
-[node name="FloatingBox7" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox7" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(0.79, 0, 0, 0, 0.79, 0, 0, 0, 0.79, 3.5646, 9.65662, 14.8238)
 
-[node name="FloatingBox14" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox14" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(0.79, 0, 0, 0, 0.79, 0, 0, 0, 0.79, -15.6289, 12.7846, 0.615582)
 
-[node name="FloatingBox3" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox3" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 11.4417, 30.4525, 33.702)
 
-[node name="FloatingBox4" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox4" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -47.0975, 63.4251, 33.702)
 
-[node name="FloatingBox16" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox16" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 13.4275, 63.4251, -29.5026)
 
-[node name="FloatingBox17" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox17" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -29.4348, 66.1803, -13.3127)
 
-[node name="FloatingBox18" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox18" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -13.6282, 62.9416, 13.687)
 
-[node name="FloatingBox19" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox19" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 21.4074, 52.5337, 30.6456)
 
-[node name="FloatingBox5" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox5" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -38.9234, 49.3865, 56.7591)
 
-[node name="FloatingBox8" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox8" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 34.7941, 32.5182, 15.8309)
 
-[node name="FloatingBox10" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox10" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 20.353, 29.8762, -41.5364)
 
-[node name="FloatingBox11" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox11" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -13.2972, 15.225, -22.3507)
 
-[node name="FloatingBox9" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox9" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, 30.0531, 21.5109, 62.6861)
 
-[node name="FloatingBox6" parent="Main_Area" instance=ExtResource("4_aqk2v")]
+[node name="FloatingBox6" parent="Main_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -84.8553, 45.1892, -45.1137)
 
-[node name="Ramp" parent="Main_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp" parent="Main_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(5.705, 0, 0, 0, 3.855, 0, 0, 0, 12.555, 0, 0.566118, -20.9512)
 
-[node name="Ramp3" parent="Main_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp3" parent="Main_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(36.59, 0, 0, 0, 20.014, 0, 0, 0, 156.316, -61.1756, 0.903, -60.066)
 
-[node name="Ramp2" parent="Main_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp2" parent="Main_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(5.705, 0, 0, 0, 1.61, 0, 0, 0, 12.555, 12.22, 0.566118, -5.69196)
 
-[node name="Ramp4" parent="Main_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp4" parent="Main_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(21.12, 0, 0, 0, 3.735, 0, 0, 0, 12.555, -6.02171, 0.566118, 25.4415)
 
-[node name="Ramp5" parent="Main_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp5" parent="Main_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(39.865, 0, 0, 0, 7.05, 0, 0, 0, 23.698, 23.576, 0.566118, 70.3949)
 
-[node name="Ramp6" parent="Main_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp6" parent="Main_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(39.865, 0, 0, 0, 2.92, 0, 0, 0, 23.698, 23.576, 0.768221, 47.1178)
 
 [node name="TeleExit" type="Node3D" parent="Main_Area"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.9347, 94.8478, 35.3461)
 
-[node name="WhopTele" parent="Main_Area" node_paths=PackedStringArray("destination") instance=ExtResource("7_pkg7o")]
+[node name="WhopTele" parent="Main_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_lo85r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.93622, 3.78429, -7.69519)
 destination = NodePath("../TeleExit")
 set_view_right_deg = -102.032
@@ -192,7 +198,7 @@ light_energy = 2.156
 shadow_enabled = true
 omni_range = 6.015
 
-[node name="ObstTele" parent="Main_Area" node_paths=PackedStringArray("destination") instance=ExtResource("7_pkg7o")]
+[node name="ObstTele" parent="Main_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_lo85r")]
 transform = Transform3D(0.68672, 0, 0.726922, 0, 1, 0, -0.726922, 0, 0.68672, -14.6162, 3.56985, 0)
 destination = NodePath("../../Obstacle_Course_Area/Start_Platform/TeleExit")
 
@@ -225,10 +231,10 @@ mesh = SubResource("BoxMesh_7r4gi")
 [node name="TeleExit" type="Node3D" parent="Obstacle_Course_Area/Start_Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
-[node name="StartPillar1" parent="Obstacle_Course_Area/Start_Platform" instance=ExtResource("4_aqk2v")]
+[node name="StartPillar1" parent="Obstacle_Course_Area/Start_Platform" instance=ExtResource("2_17ebq")]
 transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, 9.5)
 
-[node name="StartPillar2" parent="Obstacle_Course_Area/Start_Platform" instance=ExtResource("4_aqk2v")]
+[node name="StartPillar2" parent="Obstacle_Course_Area/Start_Platform" instance=ExtResource("2_17ebq")]
 transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, -9.5)
 
 [node name="End_Platform" type="StaticBody3D" parent="Obstacle_Course_Area"]
@@ -240,28 +246,28 @@ shape = SubResource("BoxShape3D_qfnet")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle_Course_Area/End_Platform"]
 mesh = SubResource("BoxMesh_i7141")
 
-[node name="GrapplePoint1" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
+[node name="GrapplePoint1" parent="Obstacle_Course_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -36.4487, 15, 0)
 
-[node name="GrapplePoint2" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
+[node name="GrapplePoint2" parent="Obstacle_Course_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -75, 15, 0)
 
-[node name="GrapplePoint3" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
+[node name="GrapplePoint3" parent="Obstacle_Course_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -135.273, 15, 0.0249939)
 
-[node name="Ramp" parent="Obstacle_Course_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp" parent="Obstacle_Course_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(-1.31134e-06, 0, 100, 0, 20, 0, -30, 0, -4.37114e-06, -320, -55, 15)
 
-[node name="Ramp2" parent="Obstacle_Course_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp2" parent="Obstacle_Course_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(-1.31134e-06, 0, 110, 0, 20, 0, -30, 0, -4.80825e-06, -330, -55, -35)
 
-[node name="Ramp3" parent="Obstacle_Course_Area" instance=ExtResource("5_036b0")]
+[node name="Ramp3" parent="Obstacle_Course_Area" instance=ExtResource("3_nxseg")]
 transform = Transform3D(-1.31134e-06, 0, 100, 0, 20, 0, -30, 0, -4.37114e-06, -330, -100, -35)
 
-[node name="BlockerWall1" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
+[node name="BlockerWall1" parent="Obstacle_Course_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(200, 0, 0, 0, 50, 0, 0, 0, 1, -275, -30, -25)
 
-[node name="GrapplePoint4" parent="Obstacle_Course_Area/BlockerWall1" instance=ExtResource("4_aqk2v")]
+[node name="GrapplePoint4" parent="Obstacle_Course_Area/BlockerWall1" instance=ExtResource("2_17ebq")]
 transform = Transform3D(0.05, 0, 0, 0, 0.2, 0, 0, 0, 10, -0.5, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Obstacle_Course_Area/BlockerWall1"]
@@ -270,7 +276,7 @@ light_energy = 15.0
 omni_range = 100.0
 omni_attenuation = 0.8
 
-[node name="BlockerWall2" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
+[node name="BlockerWall2" parent="Obstacle_Course_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(1, 0, 0, 0, 50, 0, 0, 0, 150, -425, -40, -25)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Obstacle_Course_Area/BlockerWall2"]
@@ -279,13 +285,13 @@ light_energy = 15.0
 omni_range = 100.0
 omni_attenuation = 0.8
 
-[node name="GrapplePoint4" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
+[node name="GrapplePoint4" parent="Obstacle_Course_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -175, -65, -50)
 
-[node name="GrapplePoint5" parent="Obstacle_Course_Area" instance=ExtResource("4_aqk2v")]
+[node name="GrapplePoint5" parent="Obstacle_Course_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -425, -70, -50)
 
-[node name="FailZone" parent="Obstacle_Course_Area" node_paths=PackedStringArray("destination") instance=ExtResource("7_pkg7o")]
+[node name="FailZone" parent="Obstacle_Course_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_lo85r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -300, -65, -25)
 destination = NodePath("../Start_Platform/TeleExit")
 preserve_xy_velocity = false
@@ -296,6 +302,9 @@ shape = SubResource("BoxShape3D_i7141")
 
 [node name="Skin" parent="Obstacle_Course_Area/FailZone" index="1"]
 material_override = SubResource("StandardMaterial3D_qfnet")
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.9512, -6.05459)
 
 [editable path="Main_Area/WhopTele"]
 [editable path="Main_Area/ObstTele"]
