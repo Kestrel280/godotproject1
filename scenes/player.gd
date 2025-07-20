@@ -1,9 +1,6 @@
 class_name Player extends CharacterBody3D
 
 
-signal paused
-
-
 const MOUSE_SENSITIVITY = 0.0015; # TODO move to a globals/settings
 
 
@@ -72,11 +69,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event):
 	if event is InputEventKey:
-		if Input.is_action_just_pressed("pause") and (!Globals.paused):
-			get_viewport().set_input_as_handled();
-			Globals.paused = true;
-			paused.emit();
-		elif Input.is_action_just_pressed("weapon0"): _equipWeapon(0);
+		if Input.is_action_just_pressed("weapon0"): _equipWeapon(0);
 		elif Input.is_action_just_pressed("weapon1"): _equipWeapon(1);
 		elif Input.is_action_just_pressed("weapon2"): _equipWeapon(2);
 		elif Input.is_action_just_pressed("weapon3"): _equipWeapon(3);

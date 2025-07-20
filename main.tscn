@@ -1,20 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://rbgma3n7gao2"]
+[gd_scene load_steps=3 format=3 uid="uid://rbgma3n7gao2"]
 
 [ext_resource type="Script" uid="uid://b5f6e67uow8lc" path="res://main.gd" id="1_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://4mbo3jq1qpdv" path="res://scenes/player.tscn" id="2_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://c76pos58ksu64" path="res://scenes/game_ui.tscn" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://fwk86cuqurbc" path="res://ui_container.gd" id="2_h2yge"]
 
 [node name="Main" type="Node"]
 process_mode = 1
 script = ExtResource("1_1bvp3")
 
-[node name="Player" parent="." instance=ExtResource("2_1bvp3")]
-process_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3394, 4.4538, 1.61053)
-
-[node name="GameUi" parent="." instance=ExtResource("3_lquwl")]
+[node name="UiContainer" type="Node" parent="."]
 process_mode = 3
+script = ExtResource("2_h2yge")
 
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="paused" from="Player" to="." method="_on_player_paused"]
-[connection signal="unpaused" from="GameUi" to="." method="_on_game_ui_unpaused"]
+[connection signal="paused" from="UiContainer" to="." method="_on_ui_container_paused"]
+[connection signal="player_requested_map_load" from="UiContainer" to="." method="_on_ui_container_player_requested_map_load"]
+[connection signal="unpaused" from="UiContainer" to="." method="_on_ui_container_unpaused"]
