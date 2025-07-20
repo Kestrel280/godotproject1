@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cir7c7eml2lmo"
-path.s3tc="res://.godot/imported/__face_debug.png-436a051ba7caecd0e5ac10aaed10d34e.s3tc.ctex"
+uid="uid://cgrd0xujxwj3g"
+path.s3tc="res://.godot/imported/rly.png-c907d6ee5a7c121d1a00df9dea9a6551.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/__face_debug.png"
-dest_files=["res://.godot/imported/__face_debug.png-436a051ba7caecd0e5ac10aaed10d34e.s3tc.ctex"]
+source_file="res://textures/rly.png"
+dest_files=["res://.godot/imported/rly.png-c907d6ee5a7c121d1a00df9dea9a6551.s3tc.ctex"]
 
 [params]
 

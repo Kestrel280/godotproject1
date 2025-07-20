@@ -1,6 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://d1j0hv2nafex7"]
+[gd_scene load_steps=16 format=3 uid="uid://d1j0hv2nafex7"]
 
-[ext_resource type="Texture2D" uid="uid://cume6wvq8poqb" path="res://textures/crosshair.png" id="1_uf18y"]
+[ext_resource type="Texture2D" uid="uid://cgrd0xujxwj3g" path="res://textures/rly.png" id="1_uf18y"]
 [ext_resource type="PackedScene" uid="uid://coaecjmpu04b" path="res://prefabs/box.tscn" id="2_qqv0e"]
 [ext_resource type="PackedScene" uid="uid://c007o8nr32axm" path="res://prefabs/ramp.tscn" id="3_4k56d"]
 [ext_resource type="PackedScene" uid="uid://cv73x563v8fyl" path="res://scenes/teleporter.tscn" id="4_m15uv"]
@@ -17,7 +17,7 @@ size = Vector3(300, 2, 300)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
 albedo_texture = ExtResource("1_uf18y")
-uv1_scale = Vector3(1.325, 1.325, 1.325)
+uv1_scale = Vector3(50, 50, 50)
 
 [sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
 material = SubResource("StandardMaterial3D_tlwt5")
@@ -43,51 +43,58 @@ normal_enabled = true
 normal_scale = 0.2
 normal_texture = SubResource("NoiseTexture2D_pkg7o")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_71j4m"]
-size = Vector3(5.48, 5.375, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71j4m"]
-transparency = 1
-albedo_color = Color(1, 0.14902, 1, 0.490196)
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
-sky_top_color = Color(0.103811, 0.397203, 0.944196, 1)
-sky_horizon_color = Color(0.6371, 0.603043, 0.952139, 1)
-sky_curve = 0.382368
-ground_bottom_color = Color(0.375133, 0.488712, 0.343539, 1)
+sky_top_color = Color(0.61207, 0.799878, 0.997301, 1)
+sky_horizon_color = Color(0.475019, 0.391284, 0.880231, 1)
+sky_curve = 0.0989629
+ground_bottom_color = Color(0.0927872, 0.522458, 0.307921, 1)
 ground_horizon_color = Color(1, 1, 1, 1)
+ground_curve = 0.00637278
 
 [sub_resource type="Sky" id="Sky_fj7yv"]
 sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
 
 [sub_resource type="Environment" id="Environment_tlwt5"]
 background_mode = 2
-background_energy_multiplier = 0.2
+background_energy_multiplier = 0.5
 sky = SubResource("Sky_fj7yv")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4mrxx"]
-size = Vector3(20, 1, 20)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7r4gi"]
-size = Vector3(20, 1, 20)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qfnet"]
-size = Vector3(10, 1, 150)
-
-[sub_resource type="BoxMesh" id="BoxMesh_i7141"]
-size = Vector3(10, 1, 150)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_i7141"]
-size = Vector3(250, 1, 150)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfnet"]
-transparency = 1
-albedo_color = Color(0.984314, 0.105882, 0, 0.4)
 
 [node name="Map2" type="Node3D"]
 script = SubResource("GDScript_iu4sv")
 
 [node name="Main_Area" type="Node3D" parent="."]
+
+[node name="Slopes" type="Node3D" parent="Main_Area"]
+
+[node name="Ramp5" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 20, 0, 0, 0, 23.698, -70, 1, 70)
+
+[node name="Ramp6" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 18, 0, 0, 0, 23.698, -70, 1, 47.5)
+
+[node name="Ramp7" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 16, 0, 0, 0, 23.698, -70, 1, 25)
+
+[node name="Ramp8" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 14, 0, 0, 0, 23.698, -70, 1, 1.5)
+
+[node name="Ramp9" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 12, 0, 0, 0, 23.698, -70, 1, -22)
+
+[node name="Ramp10" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 10, 0, 0, 0, 23.698, -70, 1, -44.5)
+
+[node name="Ramp11" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 8, 0, 0, 0, 23.698, -70, 1, -68)
+
+[node name="Ramp12" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 6, 0, 0, 0, 23.698, -70, 1, -91.5)
+
+[node name="Ramp13" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 4, 0, 0, 0, 23.698, -70, 1, -115)
+
+[node name="Ramp14" parent="Main_Area/Slopes" instance=ExtResource("3_4k56d")]
+transform = Transform3D(100, 0, 0, 0, 2, 0, 0, 0, 23.698, -70, 1, -138.5)
 
 [node name="Floor" type="StaticBody3D" parent="Main_Area"]
 
@@ -97,63 +104,13 @@ shape = SubResource("BoxShape3D_gv5m4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Main_Area/Floor"]
 mesh = SubResource("BoxMesh_f3sb7")
 
-[node name="Box" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.29295, 1.52656, -4.49453)
-
-[node name="FloatingBox1" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 23.2024, 22.2673, 3.68025)
-
-[node name="FloatingBox2" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 3.448, 21.147, 14.446)
-
-[node name="FloatingBox15" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, -2.78151, 21.147, 45.8293)
-
-[node name="FloatingBox12" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 6.51993, 9.14539, -26.0107)
-
-[node name="FloatingBox13" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 32.986, 11.793, -10.6353)
-
-[node name="FloatingBox7" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(0.79, 0, 0, 0, 0.79, 0, 0, 0, 0.79, 3.5646, 9.65662, 14.8238)
-
-[node name="FloatingBox14" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(0.79, 0, 0, 0, 0.79, 0, 0, 0, 0.79, -15.6289, 12.7846, 0.615582)
-
-[node name="FloatingBox3" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(2.885, 0, 0, 0, 2.885, 0, 0, 0, 2.885, 11.4417, 30.4525, 33.702)
-
-[node name="FloatingBox11" parent="Main_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(5.83, 0, 0, 0, 5.83, 0, 0, 0, 5.83, -13.2972, 15.225, -42.8866)
-
-[node name="Ramp" parent="Main_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(5.705, 0, 0, 0, 3.855, 0, 0, 0, 12.555, 0, 0.566118, -20.9512)
-
-[node name="Ramp3" parent="Main_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(36.59, 0, 0, 0, 20.014, 0, 0, 0, 156.316, -61.1756, 0.903, -60.066)
-
-[node name="Ramp2" parent="Main_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(5.705, 0, 0, 0, 1.61, 0, 0, 0, 12.555, 12.22, 0.566118, -5.69196)
-
-[node name="Ramp4" parent="Main_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(21.12, 0, 0, 0, 3.735, 0, 0, 0, 12.555, -6.02171, 0.566118, 25.4415)
-
-[node name="Ramp5" parent="Main_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(39.865, 0, 0, 0, 7.05, 0, 0, 0, 23.698, 23.576, 0.566118, 70.3949)
-
-[node name="Ramp6" parent="Main_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(39.865, 0, 0, 0, 2.92, 0, 0, 0, 23.698, 23.576, 0.768221, 47.1178)
-
 [node name="TeleExit" type="Node3D" parent="Main_Area"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.9347, 94.8478, 35.3461)
 
 [node name="WhopTele" parent="Main_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_m15uv")]
-transform = Transform3D(0.707057, 0, -0.707156, 0, 1, 0, 0.707156, 0, 0.707057, -0.139444, 3.78429, -6.64622)
+transform = Transform3D(0.707057, 0, -0.707156, 0, 1, 0, 0.707156, 0, 0.707057, 63.5762, 3.78429, 11.777)
 destination = NodePath("../TeleExit")
-set_view_right_deg = -102.032
-set_view_up_deg = -57.112
 
 [node name="TriggerVolume" parent="Main_Area/WhopTele" index="0"]
 shape = SubResource("BoxShape3D_pkg7o")
@@ -162,120 +119,57 @@ shape = SubResource("BoxShape3D_pkg7o")
 material_override = SubResource("StandardMaterial3D_pkg7o")
 cast_shadow = 0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Main_Area"]
-transform = Transform3D(0.999989, 0.00462511, 0, -0.00462511, 0.999989, 0, 0, 0, 1, 2.79724, 3.8053, -8.207)
-light_energy = 2.156
+[node name="Box" parent="Main_Area" instance=ExtResource("2_qqv0e")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 200, -35.9945, 47.1076, -16.4979)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Main_Area/Box"]
+transform = Transform3D(0.169181, 4.66255e-09, -0.106667, 0.106667, -7.39513e-09, 0.169181, 0, -0.005, -2.18557e-10, 0.141485, -1.44875, 0.372974)
+light_color = Color(1, 0.448686, 0.365624, 1)
+light_energy = 4.53
 shadow_enabled = true
-omni_range = 6.015
+shadow_bias = 2.332
+shadow_blur = 0.622
+spot_range = 92.608
+spot_attenuation = 0.0
+spot_angle = 67.42
 
-[node name="ObstTele" parent="Main_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_m15uv")]
-transform = Transform3D(0.909823, 0, -0.414995, 0, 1, 0, 0.414995, 0, 0.909823, -14.6162, 3.56985, -8.11378)
-destination = NodePath("../../Obstacle_Course_Area/Start_Platform/TeleExit")
-
-[node name="TriggerVolume" parent="Main_Area/ObstTele" index="0"]
-shape = SubResource("BoxShape3D_71j4m")
-
-[node name="Skin" parent="Main_Area/ObstTele" index="1"]
-material_override = SubResource("StandardMaterial3D_71j4m")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.735603, -0.586657, 0.338705, -1.47454e-08, 0.499998, 0.866026, -0.677412, -0.637052, 0.3678, 0, 9.27462, 0)
-light_energy = 0.4
+[node name="SpotLight3D2" type="SpotLight3D" parent="Main_Area/Box"]
+transform = Transform3D(0.169181, 4.66255e-09, -0.106667, 0.106667, -7.39513e-09, 0.169181, 0, -0.005, -2.18557e-10, 0.141485, -1.44875, 0.113201)
+light_color = Color(0.140668, 0.774838, 0.142566, 1)
+light_energy = 2.235
 shadow_enabled = true
+shadow_bias = 2.332
+shadow_blur = 0.622
+spot_range = 100.787
+spot_attenuation = 0.0
+spot_angle = 64.02
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Main_Area/Box"]
+transform = Transform3D(0.169181, 4.66255e-09, -0.106667, 0.106667, -7.39513e-09, 0.169181, 0, -0.005, -2.18557e-10, 0.141485, -1.44875, -0.168956)
+light_color = Color(0, 0.564767, 0.947138, 1)
+light_energy = 4.288
+shadow_enabled = true
+shadow_bias = 2.332
+shadow_blur = 0.622
+spot_range = 67.66
+spot_attenuation = 0.0
+spot_angle = 62.65
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Main_Area/Box"]
+transform = Transform3D(0.169181, 4.66255e-09, -0.106667, 0.106667, -7.39513e-09, 0.169181, 0, -0.005, -2.18557e-10, 0.141485, -1.44875, -0.4795)
+light_color = Color(0.74441, 0.000425091, 0.744405, 1)
+light_energy = 5.737
+shadow_enabled = true
+shadow_bias = 2.332
+shadow_blur = 0.622
+spot_range = 84.286
+spot_attenuation = 0.0
+spot_angle = 64.7
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_tlwt5")
 
-[node name="Obstacle_Course_Area" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 235.416, 189.276, 208.881)
-
-[node name="Start_Platform" type="StaticBody3D" parent="Obstacle_Course_Area"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2994, 9.10669, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle_Course_Area/Start_Platform"]
-shape = SubResource("BoxShape3D_4mrxx")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle_Course_Area/Start_Platform"]
-mesh = SubResource("BoxMesh_7r4gi")
-
-[node name="TeleExit" type="Node3D" parent="Obstacle_Course_Area/Start_Platform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="StartPillar1" parent="Obstacle_Course_Area/Start_Platform" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, 9.5)
-
-[node name="StartPillar2" parent="Obstacle_Course_Area/Start_Platform" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9.5, 3, -9.5)
-
-[node name="End_Platform" type="StaticBody3D" parent="Obstacle_Course_Area"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -430, -65, -25)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle_Course_Area/End_Platform"]
-shape = SubResource("BoxShape3D_qfnet")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle_Course_Area/End_Platform"]
-mesh = SubResource("BoxMesh_i7141")
-
-[node name="GrapplePoint1" parent="Obstacle_Course_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -36.4487, 15, 0)
-
-[node name="GrapplePoint2" parent="Obstacle_Course_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -75, 15, 0)
-
-[node name="GrapplePoint3" parent="Obstacle_Course_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -135.273, 15, 0.0249939)
-
-[node name="Ramp" parent="Obstacle_Course_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(-1.31134e-06, 0, 100, 0, 20, 0, -30, 0, -4.37114e-06, -320, -55, 15)
-
-[node name="Ramp2" parent="Obstacle_Course_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(-1.31134e-06, 0, 110, 0, 20, 0, -30, 0, -4.80825e-06, -330, -55, -35)
-
-[node name="Ramp3" parent="Obstacle_Course_Area" instance=ExtResource("3_4k56d")]
-transform = Transform3D(-1.31134e-06, 0, 100, 0, 20, 0, -30, 0, -4.37114e-06, -330, -100, -35)
-
-[node name="BlockerWall1" parent="Obstacle_Course_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(200, 0, 0, 0, 50, 0, 0, 0, 1, -275, -30, -25)
-
-[node name="GrapplePoint4" parent="Obstacle_Course_Area/BlockerWall1" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(0.05, 0, 0, 0, 0.2, 0, 0, 0, 10, -0.5, 0, 0)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Obstacle_Course_Area/BlockerWall1"]
-transform = Transform3D(0.005, 0, 0, 0, 0.02, 0, 0, 0, 1, 0, 0, -5)
-light_energy = 15.0
-omni_range = 100.0
-omni_attenuation = 0.8
-
-[node name="BlockerWall2" parent="Obstacle_Course_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(1, 0, 0, 0, 50, 0, 0, 0, 150, -425, -40, -25)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Obstacle_Course_Area/BlockerWall2"]
-transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 0.00666667, -4.8028, 0, 0)
-light_energy = 15.0
-omni_range = 100.0
-omni_attenuation = 0.8
-
-[node name="GrapplePoint4" parent="Obstacle_Course_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -175, -65, -50)
-
-[node name="GrapplePoint5" parent="Obstacle_Course_Area" instance=ExtResource("2_qqv0e")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -425, -70, -50)
-
-[node name="FailZone" parent="Obstacle_Course_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_m15uv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -300, -65, -25)
-destination = NodePath("../Start_Platform/TeleExit")
-preserve_xy_velocity = false
-preserve_z_velocity = false
-
-[node name="TriggerVolume" parent="Obstacle_Course_Area/FailZone" index="0"]
-shape = SubResource("BoxShape3D_i7141")
-
-[node name="Skin" parent="Obstacle_Course_Area/FailZone" index="1"]
-material_override = SubResource("StandardMaterial3D_qfnet")
-
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.9512, 7.33595)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.4449, 12.9512, 18.7586)
 
 [editable path="Main_Area/WhopTele"]
-[editable path="Main_Area/ObstTele"]
-[editable path="Obstacle_Course_Area/FailZone"]

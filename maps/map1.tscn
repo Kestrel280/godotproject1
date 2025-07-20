@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://on6rtx26b35i"]
 
-[ext_resource type="Texture2D" uid="uid://cir7c7eml2lmo" path="res://textures/__face_debug.png" id="1_7dfyu"]
+[ext_resource type="Texture2D" uid="uid://cir7c7eml2lmo" path="res://textures/cap.png" id="1_7dfyu"]
 [ext_resource type="PackedScene" uid="uid://coaecjmpu04b" path="res://prefabs/box.tscn" id="2_17ebq"]
 [ext_resource type="PackedScene" uid="uid://c007o8nr32axm" path="res://prefabs/ramp.tscn" id="3_nxseg"]
 [ext_resource type="PackedScene" uid="uid://cv73x563v8fyl" path="res://scenes/teleporter.tscn" id="4_lo85r"]
