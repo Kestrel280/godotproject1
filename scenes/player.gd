@@ -97,13 +97,15 @@ func _equipWeapon(idx : int) -> void:
 	$Head/WeaponContainer.add_child(weaponMesh);
 
 
+func set_view_angle_by_look_vector(dir : Vector3) -> void:
+	rot_x = -dir.slide(Vector3(0, 1, 0)).angle_to(Vector3(0, 0, -1)); # project onto xz plane and get angle from -z axis
+	rot_y = -dir.slide(Vector3(0, 0, 1)).angle_to(Vector3(1, 0, 0)); # up/down: project onto xy plane and get angle from x axis
+	set_view_angle(rot_x, rot_y);
+
+
 func set_view_angle(right : float, up : float) -> void:
-	rot_x = right;
-	rot_y = up;
-	self.transform.basis = Basis();
-	self.rotate_object_local(Vector3(0, 1, 0), rot_x);
-	$Head.transform.basis = Basis();
-	$Head.rotate_object_local(Vector3(1, 0, 0), rot_y);
+	self.rotation.y = rot_x;
+	$Head.rotation.x = rot_y;
 
 
 func attach_hook(pos : Vector3):

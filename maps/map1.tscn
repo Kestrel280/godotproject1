@@ -182,8 +182,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.9347, 94.8478, 35.3461)
 [node name="WhopTele" parent="Main_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_lo85r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.93622, 3.78429, -7.69519)
 destination = NodePath("../TeleExit")
-set_view_right_deg = -102.032
-set_view_up_deg = -57.112
 
 [node name="TriggerVolume" parent="Main_Area/WhopTele" index="0"]
 shape = SubResource("BoxShape3D_pkg7o")
@@ -294,8 +292,6 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -425, -70, -50)
 [node name="FailZone" parent="Obstacle_Course_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_lo85r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -300, -65, -25)
 destination = NodePath("../Start_Platform/TeleExit")
-preserve_xy_velocity = false
-preserve_z_velocity = false
 
 [node name="TriggerVolume" parent="Obstacle_Course_Area/FailZone" index="0"]
 shape = SubResource("BoxShape3D_i7141")

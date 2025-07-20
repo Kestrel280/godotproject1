@@ -104,13 +104,17 @@ shape = SubResource("BoxShape3D_gv5m4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Main_Area/Floor"]
 mesh = SubResource("BoxMesh_f3sb7")
 
-[node name="TeleExit" type="Node3D" parent="Main_Area"]
+[node name="WhopTeleExit" type="Node3D" parent="Main_Area"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.9347, 94.8478, 35.3461)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.413, 94.8478, -50.6025)
 
 [node name="WhopTele" parent="Main_Area" node_paths=PackedStringArray("destination") instance=ExtResource("4_m15uv")]
-transform = Transform3D(0.707057, 0, -0.707156, 0, 1, 0, 0.707156, 0, 0.707057, 63.5762, 3.78429, 11.777)
-destination = NodePath("../TeleExit")
+transform = Transform3D(0.707057, 0, -0.707156, 0, 1, 0, 0.707156, 0, 0.707057, 41.8384, 3.78429, 6.54079)
+destination = NodePath("../WhopTeleExit")
+preserve_xy_velocity = false
+preserve_z_velocity = false
+add_velocity = Vector3(2000, 0, 0)
+set_view_angle = true
 
 [node name="TriggerVolume" parent="Main_Area/WhopTele" index="0"]
 shape = SubResource("BoxShape3D_pkg7o")
@@ -170,6 +174,6 @@ spot_angle = 64.7
 environment = SubResource("Environment_tlwt5")
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.4449, 12.9512, 18.7586)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.4449, 8.36391, 18.7586)
 
 [editable path="Main_Area/WhopTele"]
