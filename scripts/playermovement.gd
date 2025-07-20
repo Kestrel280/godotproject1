@@ -28,7 +28,8 @@ func move(_dt : float) -> void:
 			_airMove();
 		elif Input.is_action_pressed("jump") and _tryJump():
 			Globals.debug_box.text = "JUMPING";
-			_airMove();
+			if player.hooked: _airMoveHooked();
+			else: _airMove();
 		else:
 			Globals.debug_box.text = "WALKING";
 			_groundMove()
