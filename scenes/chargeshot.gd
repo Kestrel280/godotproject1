@@ -1,6 +1,9 @@
 extends RigidBody3D
 
 
+@export var base_speed : float = 15.0;
+
+
 func _init() -> void:
 	self.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC;
 	self.freeze = true;

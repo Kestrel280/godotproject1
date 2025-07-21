@@ -62,7 +62,7 @@ sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
 
 [sub_resource type="Environment" id="Environment_tlwt5"]
 background_mode = 2
-background_energy_multiplier = 0.2
+background_energy_multiplier = 0.35
 sky = SubResource("Sky_fj7yv")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4mrxx"]
@@ -208,7 +208,7 @@ material_override = SubResource("StandardMaterial3D_71j4m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.735603, -0.586657, 0.338705, -1.47454e-08, 0.499998, 0.866026, -0.677412, -0.637052, 0.3678, 0, 9.27462, 0)
-light_energy = 0.4
+light_energy = 0.8
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -254,13 +254,13 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -75, 15, 0)
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -135.273, 15, 0.0249939)
 
 [node name="Ramp" parent="Obstacle_Course_Area" instance=ExtResource("3_nxseg")]
-transform = Transform3D(-1.31134e-06, 0, 100, 0, 20, 0, -30, 0, -4.37114e-06, -320, -55, 15)
+transform = Transform3D(-1.5299e-06, 0, 100, 0, 20, 0, -35, 0, -4.37114e-06, -320, -55, 17.5)
 
 [node name="Ramp2" parent="Obstacle_Course_Area" instance=ExtResource("3_nxseg")]
-transform = Transform3D(-1.31134e-06, 0, 110, 0, 20, 0, -30, 0, -4.80825e-06, -330, -55, -35)
+transform = Transform3D(-1.5299e-06, 0, 110, 0, 20, 0, -35, 0, -4.80825e-06, -330, -55, -32.5)
 
 [node name="Ramp3" parent="Obstacle_Course_Area" instance=ExtResource("3_nxseg")]
-transform = Transform3D(-1.31134e-06, 0, 100, 0, 20, 0, -30, 0, -4.37114e-06, -330, -100, -35)
+transform = Transform3D(-1.5299e-06, 0, 100, 0, 20, 0, -35, 0, -4.37114e-06, -330, -100, -32.5)
 
 [node name="BlockerWall1" parent="Obstacle_Course_Area" instance=ExtResource("2_17ebq")]
 transform = Transform3D(200, 0, 0, 0, 50, 0, 0, 0, 1, -275, -30, -25)

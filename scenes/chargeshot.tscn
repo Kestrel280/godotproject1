@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://6h2rom2yelas"]
+[gd_scene load_steps=7 format=3 uid="uid://6h2rom2yelas"]
 
 [ext_resource type="Script" uid="uid://cusnrgyliavc5" path="res://scenes/chargeshot.gd" id="1_qu046"]
 
@@ -11,9 +11,29 @@ height = 0.1
 resource_local_to_scene = true
 radius = 0.05
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qu046"]
+inherit_velocity_ratio = 0.313
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 4.9, 0)
+scale_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qu046"]
+albedo_color = Color(0.396128, 0.569659, 0.932405, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_qu046"]
+material = SubResource("StandardMaterial3D_qu046")
+size = Vector2(0.035, 0.035)
+
 [node name="Chargeshot" type="RigidBody3D"]
 collision_layer = 0
 collision_mask = 0
+gravity_scale = 0.65
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_qu046")
@@ -26,3 +46,10 @@ shape = SubResource("SphereShape3D_kawvr")
 
 [node name="Light" type="OmniLight3D" parent="."]
 omni_range = 10.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 128
+trail_enabled = true
+trail_lifetime = 1.82
+process_material = SubResource("ParticleProcessMaterial_qu046")
+draw_pass_1 = SubResource("QuadMesh_qu046")

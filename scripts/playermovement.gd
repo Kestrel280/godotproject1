@@ -81,7 +81,7 @@ func _airMoveHooked():
 		var sqPreAdjustSpeed = outWishVel.length_squared();
 		outWishVel = outWishVel.slide(hook_to_player_unit_vector); # (2)
 		var sqSpeedLossRatio = outWishVel.length_squared() / sqPreAdjustSpeed;
-		if sqSpeedLossRatio > 0.95: outWishVel /= sqrt(sqSpeedLossRatio); # (3)
+		if sqSpeedLossRatio > player.hookForgiveness: outWishVel /= sqrt(sqSpeedLossRatio); # (3)
 
 
 func _groundMove() -> void:

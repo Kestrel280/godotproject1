@@ -3,6 +3,7 @@ extends Node
 
 var charging : bool = false;
 
+
 func shoot(shooter : CharacterBody3D) -> void:
 	charging = true;
 	var bullet = load("res://scenes/chargeshot.tscn").instantiate();
@@ -14,7 +15,6 @@ func shoot(shooter : CharacterBody3D) -> void:
 	var base_radius : float = bullet.get_node("Model").mesh.radius;
 	var base_light_energy : float = bullet.get_node("Light").light_energy;
 	var base_light_radius : float = bullet.get_node("Light").omni_range;
-	var impulse = 30.0;
 	while(charging and !Globals.paused):
 		await shooter.get_tree().physics_frame;
 		scale = min(scale + 0.04, 3.0);
@@ -28,7 +28,7 @@ func shoot(shooter : CharacterBody3D) -> void:
 	bullet.position = Vector3.ZERO;
 	Globals.world.add_child(bullet);
 	bullet.set_global_position(pos);
-	bullet.launch(shooter.get_node("Head/WeaponContainer").global_basis.z, impulse * scale);
+	bullet.launch(shooter.get_node("Head/WeaponContainer").global_basis.z, bullet.base_speed * scale);
 
 
 func stop_shoot(shooter : CharacterBody3D) -> void:

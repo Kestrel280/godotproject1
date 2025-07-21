@@ -11,6 +11,7 @@ const MOUSE_SENSITIVITY = 0.0015; # TODO move to a globals/settings
 @export var groundAccel : float = 5.0; # Ground acceleration
 @export var groundSpeedCap : float = 320.0 / Globals.INCHES_PER_METER; # Max walking speed on ground
 @export var weapons : Array[Weapon] = [];
+@export_range(0.8, 1.0) var hookCatchForgiveness : float = 0.9; # Lower is more forgiving; lower allows harsher "catches" without losing any speed/energy
 @export_range(0.0, 10.0) var hookRangeShrinkRate : float = 5.0; # Rate at which hook length shrinks when player gets closer to it. Higher values are more forgiving
 @export_range(100.0, 400.0) var hookMinLenSq : float = 200.0; # Smallest length (squared) to shrink hook to if player gets closer to it
 
